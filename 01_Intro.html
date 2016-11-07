@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Object Oriented Programming Intro</title>
+	<meta name="generator" content="LibreOffice 5.1.4.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2016-11-05T21:32:51.311520334"/>
+	<style type="text/css">
+		h3.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h3.ctl { font-family: "FreeSans" }
+		pre.cjk { font-family: "Nimbus Mono L", monospace }
+	</style>
+</head>
+<body lang="en-IN" dir="ltr">
+<h1>&shy;Object Oriented Programming Intro</h1>
+<h3 class="western">Four kinds of programming paradigms 
+</h3>
+<pre class="western"> (1)  <b>Imperative:</b> First do this, then do that (Algol, C, Pascal)
+
+ (2)  <b>Functional:</b> Declarative, originates from mathematical discipline (Scheme, Lisp, Scala)
+
+ (3)  <b>Logic:</b> Based on axioms, inference rules and queries (Prolog)
+
+ (4)  <b>Object oriented:</b> Supports encapsulation and logical grouping of program aspects (SmallTalk, Eiffel, Java, C++)
+</pre><h3 class="western">
+OO programming = OO thinking + programming</h3>
+<pre class="western">There is literally nothing an OO program can do which an imperative program cannot. Just a way of thinking and organizing.
+
+Centered around the concept of &quot;objects&quot; that may contain data referred to as &quot;fields&quot; or &quot;attributes&quot;
+
+And code in the form of procedures also called as &quot;methods&quot;
+
+An object's procedures can access and often modify the data fields of the object with which they are associated
+
+Features include encapsulation, data hiding, composition, inheritance,  delegation, polymorphism, dynamic dispatch
+
+Helps in better comprehensibility, safety, reusability, extensibility and maintainability</pre><h3 class="western">
+Java 
+</h3>
+<pre class="western"><span style="background: #ffff00">A general-purpose computer programming language that is concurrent, class-based, object-oriented</span> 
+
+Specifically designed to have as few dependencies as possible. Write once, run anywhere (WORA).
+
+Java applications are typically compiled to bytecode that can run on any Java virtual machine (JVM) regardless of computer architecture. 
+
+Originally developed by James Gosling at Sun Microsystems (which has since been acquired by Oracle Corporation) 
+
+The language derives much of its syntax from C and C++, but it has fewer low-level facilities than either of them.
+
+The latest version is Java 8
+
+Java's main strength:  <b>Libraries </b> -- that spans length and breadth of technologies: 
+ - core programming, GUI development, event driven programming, 
+ - networking, web development, enterprise development, big data, 
+ - concurrency, parallel and distributed programming, big data,
+ - embedded, mobile, ...... the list never ends </pre><h3 class="western">
+Writing Java Programs 
+</h3>
+<pre class="western"> You can use any editor: vi, emacs, textedit, notepad
+
+ Saved with <b>.java</b> extension
+
+ <b>javac Hello.java</b> at command prompt/terminal for compilation
+
+ <b>java Hello</b> at command prompt/terminal for execution</pre><h3 class="western">
+An Example: Sigma.java 
+</h3>
+<pre class="western">/* Aum Amma */
+
+public class Sigma {
+  public static void main(String[] args) {
+    Sigma f = new Sigma();
+    int sum = f.findSum(10);
+    System.out.println(&quot;sum = &quot; + sum);
+  }
+
+  public int findSum(int num) {
+    int sum = 0;
+    for (int i=1; i&lt;=num; i++)
+        sum += num;
+    return sum;
+  }
+}
+
+cmd&gt; javac Sigma.java    =&gt; Creates Sigma.class
+cmd&gt; java Sigma
+sum = 55
+cmd&gt;
+
+Please note: File name should be same as the class name.</pre><h3 class="western">
+Books and other reference materials 
+</h3>
+<pre class="western"><a href="../%5BBook%5D%20Java%20The%20Complete%20Reference%209th%20Ed.pdf" target="_blank">Java The Complete Reference</a>
+
+<a href="../%5BBook%5D%20ThinkingInJava.pdf" target="_blank">Java Thinking In Java</a>
+
+<a href="../%5BOverview%5D%20Java%20Tutorial.pdf" target="_blank">Java Tutorial </a> from Tutorial Point
+
+<a href="../%5BQuickRef%5D%20%20Java%20Cheatsheet.pdf" target="_blank">Java Cheatsheet</a>. Print this and get it to every lab. Just 2 pages.
+
+<a href="../%5BQuickRef%5D%20Java%20Cheatsheet%202.pdf" target="_blank">Java Cheatsheet 2</a>. A longer cheat sheet.
+
+<a href="../%5BQuickRef%5D%20Java%20Compiler%20Errors.pdf" target="_blank">Java Compiler Errors</a>. List of several compiler errors.
+
+<a href="../%5BSlides%5D%20JavaProgrammingTutorial/" target="_blank">Java Programming Tutorial</a>. Tutorial slides.
+
+<a href="http://192.168.0.48/javadocs/" target="_blank">Java 8 Docs (from Oracle)</a>. 
+
+<a href="http://192.168.0.48/tutorial/" target="_blank">Java 8 Tutorials (from Oracle)</a>. </pre><h3 class="western">
+References 
+</h3>
+<pre class="western">https://en.wikipedia.org/wiki/Object-oriented_programming
+
+http://people.cs.aau.dk/~normark/prog3-03/html/notes/paradigms_themes-paradigm-overview-section.html
+
+https://en.wikipedia.org/wiki/Java_(programming_language)
+</pre>
+</body>
+</html>

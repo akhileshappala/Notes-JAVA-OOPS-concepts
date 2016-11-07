@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Aum Amriteswaryai Namah -->
+
+<head>
+  <title>Converting Swing Applications to Applets</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+
+<h2>Converting Swing Applications to Applets</h2>
+
+
+
+<div class='post entry-content'>
+ <strong class='bbc'><span class='bbc_underline'>JApplets and Standard Java Applications</span></strong><br/>
+<br/>
+This tutorial is meant to teach both the differences and similarities between an applet and your generic Java application. I will also outline the base of each type and how to convert from one to the other.<br/>
+<br/>
+*It is assumed that the basic terminology and uses of Java are already understood, or will be learned elsewhere.<br/>
+<br/>
+Your garden variety java application has a class declaration, methods, constructors, and most often a main method. These are the basics for any single file java application. <br/>
+A simple example:<br/>
+<pre class='brush: bash ;'>
+public class Test
+{
+	//empty constructor
+	public Test&#40;&#41;
+	{
+		System.out.println&#40;“Java”&#41;;
+	}
+	//single variable constructor
+	public Test&#40;String s&#41;
+	{
+		System.out.println&#40;s&#41;;
+	}
+	//method
+	public void method&#40;&#41;
+	{
+		System.out.println&#40;“method”&#41;;
+	}
+
+	public  static void main&#40;String&#91;&#93; args&#41;
+	{
+		Test t = new Test&#40;&#41;;
+		t.method&#40;&#41;;
+	}
+}
+</pre><br/>
+<br/>
+There is little difference between this and an applet, when you break it down. There are a few specific methods, which must be present in an applet, but besides this there is little difference between the two. <br/>
+<br/>
+An applet is basically a GUI that does not have a frame. The frame is supplied by the browser window is your frame instead. This is where it becomes apparent why most Java programmers insist on designing your Graphical User Interfaces as a panel, then applying the panel, or panels to a JFrame.<br/>
+<br/>
+Required Methods: <br/>
+<strong class='bbc'>public void init() {}</strong> <br/>
+this method is run when the applet is being loaded into memory or constructed. Think of this as the applet constructor. <br/>
+<br/>
+<strong class='bbc'>public void start() {}</strong> <br/>
+this is run once all preparations are done, and the code is actually beginning to run. Place any splash screens or intro stuff here. <br/>
+<br/>
+<strong class='bbc'>public void stop() {}</strong> <br/>
+this is run when the applet has been terminated, while memory is being freed and the code is stopping. <br/>
+<br/>
+<strong class='bbc'>public void destroy() {}</strong> <br/>
+this method is called just before a system exit. Notifying that the applet has finished and cannot be run again without reloading it.<br/>
+<br/>
+**NOTE: method descritpions are borrowed from my code snippet “Applet Base”.<br/>
+<br/>
+<br/>
+<span class='bbc_underline'><strong class='bbc'>Application to JApplet:</strong></span><br/>
+A simple example base application:<br/>
+<pre class='brush: bash ;'>
+import java.io.*;
+import java.awt.*;
+import java.util.*;
+import java.applet.*;
+import javax.swing.*;
+import java.awt.event.*;  
+import javax.swing.event.*;
+
+public class Test extends JFrame
+{
+	//empty constructor
+	public Test&#40;&#41;
+	{
+		System.out.println&#40;&#34;Java&#34;&#41;;
+	   		setDefaultCloseOperation&#40;JFrame.EXIT_ON_CLOSE&#41;;
+	   		getContentPane&#40;&#41;.add&#40;new panel&#40;&#41;&#41;;		// set panel on frame
+ 
+				setSize&#40;400,600&#41;;   			// Set the size of the frame
+				setVisible&#40;true&#41;;   			// Show the frame 
+	}
+	//single variable constructor
+	public Test&#40;String s&#41;
+	{
+		System.out.println&#40;s&#41;;
+	}
+	//method
+	public void method&#40;&#41;
+	{
+		System.out.println&#40;&#34;method&#34;&#41;;
+	}
+	//Panel
+	public class panel extends JPanel
+	{
+		public panel&#40;&#41;
+		{
+			//this is where the diplay items go
+		}
+	}
+	public  static void main&#40;String&#91;&#93; args&#41;
+	{
+		new Test&#40;&#41;;
+	}
+}
+</pre><br/>
+Now to separate the JFrame from the class declaration. This requires adding a method to apply the JPanel to the JFrame we will create in the main method. This serves two purposes:<br/>
+1) The code will more closely resemble a JApplet<br/>
+2) Allows the code to be viewed in a JFrame even though it can be loaded as a JApplet as well.<br/>
+<br/>
+Modification:<br/>
+<pre class='brush: bash ;'>
+import java.io.*;
+import java.awt.*;
+import java.util.*;
+import java.applet.*;
+import javax.swing.*;
+import java.awt.event.*;  
+import javax.swing.event.*;
+
+public class Test
+{
+	//empty constructor
+	public Test&#40;&#41;
+	{
+		System.out.println&#40;&#34;Java&#34;&#41;;
+	}
+	//single variable constructor
+	public Test&#40;String s&#41;
+	{
+		System.out.println&#40;s&#41;;
+	}
+	//method
+	public void method&#40;&#41;
+	{
+		System.out.println&#40;&#34;method&#34;&#41;;
+	}
+	//Apply the Panel
+	public JPanel setPanel&#40;&#41;
+	{
+		return new panel&#40;&#41;;
+	}
+	//Panel
+	public class panel extends JPanel
+	{
+		public panel&#40;&#41;
+		{
+			//this is where the diplay items go
+		}
+	}
+	public  static void main&#40;String&#91;&#93; args&#41;
+	{
+		JFrame frame = new JFrame&#40;&#34;Frame&#34;&#41;;
+				frame.setDefaultCloseOperation&#40;JFrame.EXIT_ON_CLOSE&#41;;
+				Test t = new Test&#40;&#41;;
+				JPanel d = t.setPanel&#40;&#41;;		// get panel
+				frame.getContentPane&#40;&#41;.add&#40;d&#41;;		// set panel on frame
+ 	
+				frame.setSize&#40;400,600&#41;;   		// Set the size of the frame
+				frame.setVisible&#40;true&#41;;   		// Show the frame 
+	}
+}
+</pre><br/>
+Now to add the methods required in a JApplet, along with a few specific changes:<br/>
+1) Test class extends JApplet.<br/>
+2) The init() method should initialize the panel, required in a JApplet (not main method).<br/>
+3) Remove the setPanel() method.<br/>
+4) Add a call to init() in the main method, which simulates the browser call.<br/>
+<pre class='brush: bash ;'>
+import java.io.*;
+import java.awt.*;
+import java.util.*;
+import java.applet.*;
+import javax.swing.*;
+import java.awt.event.*;  
+import javax.swing.event.*;
+
+public class Test extends JApplet
+{
+	//empty constructor
+	public Test&#40;&#41;
+	{
+		System.out.println&#40#40;&#34;Java&#34;&#41;;
+	}
+	//single variable constructor
+	public Test&#40;String s&#41;
+	{
+		System.out.println&#40;s&#41;;
+	}
+	//method
+	public void method&#40;&#41;
+	{
+		System.out.println&#40;&#34;method&#34;&#41;;
+	}
+	//init
+	public void init&#40;&#41;
+	{
+		 		 System.out.println&#40;&#34;Applet initializing&#34;&#41;;
+		 		 getContentPane&#40;&#41;.add&#40;new panel&#40;&#41;&#41;;
+		method&#40;&#41;;
+		}
+		//start
+ 	public void start&#40;&#41;
+		{
+				System.out.println&#40;&#34;Applet starting&#34;&#41;;
+		}
+		//stop
+		public void stop&#40;&#41;
+		{
+				System.out.println&#40;&#34;Applet stopping&#34;&#41;;
+		}
+		//destroy
+		public void destroy&#40;&#41;
+		{
+				System.out.println&#40;&#34;Applet destroyed&#34;&#41;;
+		}
+	//Panel
+	public class panel extends JPanel
+	{
+		public panel&#40;&#41;
+		{
+			//this is where the diplay items go
+		}
+	}
+	public  static void main&#40;String&#91;&#93; args&#41;
+	{
+		JFrame frame = new JFrame&#40;&#34;Frame&#34;&#41;;
+		frame.setDefaultCloseOperation&#40;JFrame.EXIT_ON_CLOSE&#41;;
+		Test   t = new Test&#40;&#41;;
+		t.init&#40;&#41;;				// simulate browser call&#40;1&#41;	
+		frame.setSize&#40;400,600&#41;;   		// Set the size of the frame
+		frame.setVisible&#40;true&#41;;   		// Show the frame 
+	}
+}
+</pre><br/>
+That’s all there is to it really. Using the init() method to initialize your GUI, then calls method() to start with the actual class action.<br/>
+start() is called next in a browser, and would be a suitable place to put these calls as well. As far as this environment is concerned, init() is the better way to go.<br/>
+<br/>
+<span class='bbc_underline'><strong class='bbc'>JApplet to Application:</strong></span><br/>
+Reversing this process, creating an application from an applet, is just as simple. Exchange the extended JApplet with JFrame, and add a main method which creates a call for a new Class(); be sure the constructor calls init(), then sets the variables for display:<br/>
+<pre class='brush: bash ;'>
+import java.io.*;
+import java.awt.*;
+import java.util.*;
+import java.applet.*;
+import javax.swing.*;
+import java.awt.event.*;  
+import javax.swing.event.*;
+
+public class Test extends JFrame
+{
+	//empty constructor
+	public Test&#40;&#41;
+	{
+		System.out.println&#40;&#34;Java&#34;&#41;;
+		init&#40;&#41;;				// simulate browser call&#40;1&#41;
+		setSize&#40;400,600&#41;;   		// Set the size of the frame
+		setVisible&#40;true&#41;;   		// Show the frame 
+	}
+	//single variable constructor
+	public Test&#40;String s&#41;
+	{
+		System.out.println&#40;s&#41;;
+	}
+	//method
+	public void method&#40;&#41;
+	{
+		System.out.println&#40;&#34;method&#34;&#41;;
+	}
+	//init
+	public void init&#40;&#41;
+	{
+			  System.out.println&#40;&#34;Applet initializing&#34;&#41;;
+			  getContentPane&#40;&#41;.add&#40;new panel&#40;&#41;&#41;;
+			  method&#40;&#41;;
+   	 }
+		//start
+   	public void start&#40;&#41;
+		{
+			System.out.println&#40;&#34;Applet starting&#34;&#41;;
+		}
+		//stop
+		public void stop&#40;&#41;
+		{
+			System.out.println&#40;&#34;Applet stopping&#34;&#41;;
+		}
+		//destroy
+		public void destroy&#40;&#41;
+		{
+			System.out.println&#40;&#34;Applet destroyed&#34;&#41;;
+		}
+	//Panel
+	public class panel extends JPanel
+	{
+		public panel&#40;&#41;
+		{
+			//this is where the diplay items go
+		}
+	}
+	public  static void main&#40;String&#91;&#93; args&#41;
+	{
+		new Test&#40;&#41;;
+	}
+}
+</pre><br/>
+If you understand the conversion well enough, this conversion makes it easier to understand the first conversion. The middle step from application to applet is not completely necessary, but I felt it would make the conversion more simple, though smaller steps.
+<br/>
+</div>
+
+</body>

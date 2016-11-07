@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Interface</title>
+	<meta name="generator" content="LibreOffice 5.1.4.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2016-11-07T20:28:42.722306727"/>
+	<style type="text/css">
+		h2.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h2.ctl { font-family: "FreeSans" }
+		h3.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h3.ctl { font-family: "FreeSans" }
+		pre.cjk { font-family: "Nimbus Mono L", monospace }
+	</style>
+</head>
+<body lang="en-IN" dir="ltr">
+<h2 class="western">Interface</h2>
+<p><span style="background: #ffff00">An interface in Java is an
+abstract type that is used to specify a behaviour that classes must
+implement.</span> They are similar to protocols. Implementing an
+interface allows a class to become more formal about the behavior it
+promises to provide. Interfaces form a contract between the class and
+the outside world, and this contract is enforced at build time by the
+compiler. If your class claims to implement an interface, all methods
+defined by that interface must appear in its source code before the
+class will successfully compile.</p>
+<p>Interfaces are used to encode similarities which the classes of
+various types share, but do not necessarily constitute a class
+relationship. For instance, a triangle and a circle covers an area;
+however, the way you compute their area are pretty different. There
+is no parent-child or container-contained relationship between them.
+i.e. one is not the extension of the other nor contained within the
+other. However, they both are related in that they have to implement
+'area' method. Interface is used to capture the relationship between
+them. In such a case, you define an interface &quot;Shape&quot; and
+both Triangle and Circle implement the Shape interface.</p>
+<h3 class="western">Defining Interface</h3>
+<pre class="western">- We define an interface for Shape, very similar to class but no implementation
+
+--------------Shape.java----------------
+  public interface Shape {
+
+    public static final double pi = 3.14; 
+    
+    public double area();
+    public double perimeter();
+  }
+-----------------------------------------------
+
+- A number of points to note
+
+  1. An interface needs to be defined in a file with the same name (like class).
+  2. Only the method signature is specified and not its body.
+  3.<span style="background: #ffff00"> An interface cannot be instantiated like a class. For example,</span>
+<span style="background: #ffff00">     Shape s = new Shape(); is not possible</span>
+<span style="background: #ffff00">  4. There are no constructors for an interface, since it cannot be instantiated.</span>
+  5.<span style="background: #ffff00"> You can't define instance attributes for the same reason</span>.
+  6. You can define only &quot;static final&quot; attributes.
+
+- &quot;public static final double pi&quot;
+     final -&gt; pi value cannot be changed during its lifetime
+     static -&gt; pi value does not vary with objects of type Triangle, Circle, etc
+     public -&gt; pi can be accessed directly by &quot;Shape.pi&quot; 
+               We make it public since it is a kind of global constant
+
+<span style="background: #ffff00">- Note that it doesn't make sense to declare methods for getters or setters in an interface,</span>
+<span style="background: #ffff00">  since no object attributes are defined. i.e. only 'static final' attributes are defined </span>
+  in an interface for which values have to be set right there.
+
+  Recall: Non-static attribute belongs to an object instance, static attributes belong
+  to the class, final attribute cannot be modified.
+  
+- Nor does it make sense to define constructors since an interface can never be instantiated.</pre><h3 class="western">
+Implementing an Interface</h3>
+<pre class="western">- Typically, a class implements an interface.
+
+- Now Circle and Triangle classes can be implemented as follows.
+
+- Note: You will be forced to implement both the area() and perimeter() methods
+  Try not implementing at least one of them and check out the what happens.
+
+  public class Circle implements Shape {
+      protected double radius;
+
+     // @override
+     public double area() {
+          return pi * radius * radius;
+     }
+
+     // @override
+     public double perimeter() {
+          // Your code
+     }
+}
+
+- You should always annotate methods with @Override. It allows the Java compiler 
+  to catch errors where you think you are overriding (or implementing) a method, 
+  but are actually defining a new method (different signature). 
+
+- Note: @override is commented. Either // @override or /* @override */
+
+- In a similar fashion define classes for Triangle, Square and Rectangle.
+
+- Write driver classes to invoke, work out and understand.</pre><h3 class="western">
+Extending Interface to an Interface</h3>
+<pre class="western">- You can extend an interface to make a bigger interface. For example, if X is an interface,
+  interface Y can be extended from X as follows. 
+
+  public interface X {
+
+      public void a();
+      public void b();
+  }
+
+  public interface Y extends X {
+
+      public void c();
+  }
+
+- Now any class that implements Y must necessarily implement a(), b() and c().
+
+- But a class that implements X needs to implement only a() and b().</pre><h3 class="western">
+Extending class to an Interface</h3>
+<pre class="western">- You can also extend a class to a make an interface. For example, if P is a class,
+  interface Q can be extended from P as follows.
+
+  public class P {
+     protected int x;
+     
+     public int getX() { return x; }
+     public void setX(int val) { x = val; }
+  }
+
+  publc interface Q extends P {
+     public void someMethod()
+  }
+
+- Now any class that implements Q must implement someMethod().
+
+- P can be independently instantiated or extended since it is a class.</pre><h3 class="western">
+Implementing Multiple Interfaces</h3>
+<pre class="western"><span style="background: #ffff00">- You can implement multiple interfaces simultaneously unlike extending multiple classes</span>.
+
+- Lets say you have two intefaces X and Y.
+
+  public interface X {
+       public void a();
+       public void b();
+  }
+
+  public interface Y {
+       public void c();
+       public void d();
+  }
+
+- You can do the following.
+
+  public class Z implements X, Y {
+       public void a() { // code here };
+       public void b() { // code here };
+       public void c() { // code here };
+       public void d() { // code here };      
+  }
+
+- You have to implement all the methods that belong to both these interfaces.</pre><h3 class="western">
+Abstract Classes</h3>
+<pre class="western">- <span style="background: #ffff00">Abstract class falls between a class and interface. </span>
+
+-<span style="background: #ffff00"> They may have some but not all methods implemented. Non-implemented methods should be</span>
+<span style="background: #ffff00">  specified using 'abstract' keyword.</span>
+
+- Since they are not fully implemented, they can't be instantiated. However,<span style="background: #ffff00"> with </span>
+<span style="background: #ffff00">  abstract classes, you can declare fields that are not static and final, and define </span>
+<span style="background: #ffff00">  public, protected, and private concrete methods.</span>
+
+- Any class extending an abstract class must implement the non-implemented methods.
+
+- An example below:
+    public abstract class A {
+        public void a() {          // is implemented
+           // body of the method
+        }
+
+        public abstract void b();  // not implemented
+    }
+
+- You can extend only one class, whether or not it is abstract, whereas you can 
+  implement any number of interfaces.
+
+- Consider using abstract classes if any of these statements apply to your situation:
+
+  --- You want to share code among several closely related classes.
+  --- You expect that classes that extend your abstract class have many common methods or 
+  --- fields, or require access modifiers other than public (such as protected and private).
+  --- You want to declare non-static or non-final fields. This enables you to define methods 
+      that can access and modify the state of the object to which they belong.
+
+- We noted that a class that implements an interface must implement all of the interface's methods. 
+
+- It is possible, however, to define a class that does not implement all of the interface's methods, 
+  provided that the class is declared to be abstract. For example,
+
+abstract class X implements Y {
+  // implements all but one method of Y
+}
+
+class XX extends X {
+  // implements the remaining method in Y
+}
+
+In this case, class X must be abstract because it does not fully implement Y, but class XX does, in fact, implement Y.
+</pre><p>
+<font size="2" style="font-size: 10pt">For corrections and
+suggestions, please email to swaminathanj@am.amrita.edu. Last
+updated: 06-August-2016</font></p>
+</body>
+</html>

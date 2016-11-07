@@ -1,0 +1,578 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Encapsulation</title>
+	<meta name="generator" content="LibreOffice 5.1.4.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2016-11-06T13:59:22.110440980"/>
+	<meta name="" content=""/>
+	<style type="text/css">
+		h2.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h2.ctl { font-family: "FreeSans" }
+		h3.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h3.ctl { font-family: "FreeSans" }
+		pre.cjk { font-family: "Nimbus Mono L", monospace }
+		h4.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h4.ctl { font-family: "FreeSans" }
+		h5.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h5.ctl { font-family: "FreeSans" }
+	</style>
+</head>
+<body lang="en-IN" dir="ltr">
+<h2 class="western">Object Oriented Programming Basics</h2>
+<p>Class and Object are two main building blocks of OO that
+encapsulate attributes (fields) and operations (methods) on them. A
+class can be likened to a data type (although it is more than that)
+while the object can be likened to variable of that type. We will
+explain with a simple example.</p>
+<h3 class="western">Step 1: Defining a class</h3>
+<pre class="western">Lets define a class for representing fractions which has 2 attributes: numerator and denominator.
+
+ --------------Fraction.java --------------
+
+public class Fraction {
+  private int numerator;
+  private int denominator;
+}
+-------------------------------------------
+
+- Now object of Fraction class can be created using the following syntax.
+      Fraction f = new Fraction();  // meaning f is an instance of Fraction
+
+-<span style="background: #ffff00"> The keyword 'public' implies Fraction class can be accessed from outside.</span>
+
+<span style="background: #ffff00">- The keyword 'private' for attibutes imply they can't be accessed from 'outside'.</span>
+<span style="background: #ffff00">  i.e. one cannot access them by </span><em><span style="background: #ffff00">f.numerator=2</span></em><span style="background: #ffff00"> or </span><em><span style="background: #ffff00">f.denominator=3</span></em><span style="background: #ffff00">. Try doing this.</span>
+
+<span style="background: #ffff00">- 'public', 'protected' and 'private' are referred to as <b>access specifiers</b>.</span>
+<span style="background: #ffff00">  They are used to safeguard the attributes from improper direct access.</span>
+
+- How to assign values for numerator and denominator? 
+    - By defining methods that assign them</pre><h3 class="western">
+Step 2: Defining setters - Assigning values to attributes 
+</h3>
+<pre class="western">
+Lets define two methods to set the values of the attributes (setters)
+
+--------------Fraction.java --------------
+
+public class Fraction {
+  private int numerator;
+  private int denominator;
+
+  <b>public void setNumerator(int n) {</b>
+    <b>this.numerator = n;</b>
+  <b>}</b>
+
+  <b>public void setDenominator(int d) {</b>
+    <b>this.denominator = d;</b>
+  <b>}</b>
+}
+-------------------------------------------
+
+- Now one can set the values for the attributes by using these setter methods.
+      Fraction f = new Fraction();
+      f.setNumerator(2);
+      f.setDenominator(3);
+
+- Alternately one may have a single setter method that takes two integer arguments 
+ and assign them to the attributes. 
+
+<span style="background: #ffff00">- There are no hard and fast rules to number of setter methods. It depends on the requirement.</span>
+
+- The next question is how to access (or read) the values of these attributes.</pre><h3 class="western">
+Step 3: Defining getters - Reading values of attributes 
+</h3>
+<pre class="western">- Getters are methods defined to return the values of the attributes. We define two methods 
+ getNumerator() and getDenominator() towards this end.
+
+--------------Fraction.java --------------
+
+public class Fraction {
+  private int numerator;
+  private int denominator;
+
+  public void setNumerator(int n) {
+    this.numerator = n;
+  }
+
+  public void setDenominator(int d) {
+    this.denominator = d;
+  }
+
+  <b>public int getNumerator() {</b>
+    <b>return numerator;</b>
+  <b>}</b>
+
+  <b>public int getDenominator() {</b>
+    <b>return denominator;</b>
+  <b>}</b>
+}
+-------------------------------------------
+
+- Now one can read the values and print them as follows.
+      Fraction f = new Fraction();
+      f.setNumerator(2);
+      f.setDenominator(3);
+      System.out.println(&quot;The fraction is &quot; + f.getNumerator() + &quot;/&quot; + f.getDenominator());              
+
+- Typically we define a separate &quot;driver&quot; class to instantiate Fraction, set, read and print them. 
+  This is to separate the definition of a class from its usage. Driver class code is given below.
+
+--------------Driver.java--------------
+
+public class Driver {
+  public static void main(String[] args) {
+    Fraction f = new Fraction();
+    f.setNumerator(2);
+    f.setDenominator(3);
+    System.out.println(&quot;The fraction is &quot; + f.getNumerator() + &quot;/&quot; + f.getDenominator());                  
+  }
+}
+---------------------------------------
+
+- Compiling and execution
+  cmd&gt; javac Fraction.java Driver.java  // creates Fraction.class, Driver.class
+  cmd&gt; java Driver
+
+-<font color="#800000"><span style="background: #ffff00"> Only the class that contains main() can be executed. In this case &quot;Driver&quot;.</span></font>
+<font color="#800000"><span style="background: #ffff00">  Since Fraction is in same folder JVM automatically loads it during execution</span></font>.
+
+- By moving main() method inside Fraction class (not advisable), one may run as: 
+  cmd&gt; java Fraction
+
+- You may also implement a separate method print() in Fraction to print the attribute values.
+    public void print() {
+      System.out.println(&quot;The fraction is &quot; + this.numerator + &quot;/&quot; + this.denominator);
+    }
+
+- Hence, in the Driver class you may call this method to print the fraction.
+    Fraction f = new Fraction();
+    f.setNumerator(2);
+    f.setDenominator(3);
+    f.print();    </pre><h3 class="western">
+Step 4: Defining constructors - Initializing attributes 
+</h3>
+<pre class="western">- Constructors are special methods to initizalize an object when it comes into existence.
+  While instantiation of a class the constructor gets automatically called.
+
+- During instantiation values of few attributes may be known and can be assigned.
+
+- Constructor(s) bears the same name as that of the class.
+
+--------------Fraction.java --------------
+
+public class Fraction {
+  private int numerator;
+  private int denominator;
+
+  <b>Fraction(int n, int d) {</b>
+    <b>this.numerator = n;</b>
+    <b>this.denominator = d;</b>
+  <b>}</b>
+
+  public void setNumerator(int n) {
+    this.numerator = n;
+  }
+
+  public void setDenominator(int d) {
+    this.denominator = d;
+  }
+
+  public int getNumerator() {
+    return numerator;
+  }
+
+  public int getDenominator() {
+    return denominator;
+  }
+
+  public void print() {
+    System.out.println(&quot;The fraction is &quot; + this.numerator + &quot;/&quot; + this.denominator);
+  }
+}
+-------------------------------------------
+ 
+- One may now instantiate and print directly. The effect is the same.
+      Fraction f2 = new Fraction(2,3);
+      f2.print();
+
+- Use of constructor does not make setters redundant. 
+  Setters may be necessary for later modification of attributes.
+  
+- Implement Driver2.java and use constructor to intitialize instead of setters.</pre><h4 class="western">
+Default Constructor 
+</h4>
+<pre class="western">- A default constructor is one that does not take any arguments.  
+  It is usually used to assign default values to one or more attributes.
+
+- For example
+    <b>Fraction() {  // default constructor</b>
+      <b>this.numerator = 1;</b>
+      <b>this.denominator = 1;</b>
+    <b>}</b>
+
+- You can now check this in the driver code as follows:
+    Fraction f0 = new Fraction();
+    f0.print();
+
+  Output of this code will be 1/1
+
+- Modify the print function such that if the denominator is 1, it should not print it
+  i.e. In the above case, the output should be just 1 instead of 1/1
+
+- You can also define another constructor to pass only the numerator.
+  Denominator is set to 1 by default. For example
+
+    <b>Fraction(int n) { // Another constructor</b>
+      <b>this.numerator = n;</b>
+      <b>this.denominator = 1;</b>
+    <b>}</b>
+
+-<span style="background: #ffff00"> There is no harm in having more than one constructor. In fact, this is a feature of </span>
+<span style="background: #ffff00">  Java called <b>polymorphism</b>. Multiple methods or constructors can have the same name </span>
+<span style="background: #ffff00">  provided the number or type of arguments are different.</span>
+
+- It is an healthy practice to define constructors, getters and setters before adding features to the class.
+  Defining print methods helps in debugging errors during implementation.
+
+<span style="background: #ffff00">- There are </span>no destructors. JVM takes care of cleaning up the mess (garbage collector).</pre><h3 class="western">
+Step 5: Defining methods - Adding features/functionalities 
+</h3>
+<pre class="western">- The next step is to add the 'real' features to the class that manipulates the attributes.
+
+- <b>GOLDEN RULE TO FOLLOW: IMPLEMENT ONE METHOD FOR EACH FUNCTIONALITY</b>
+  <b>Never overload or mixup multiple functionalities in a single method.</b>
+
+- We define two methods that computes the following:
+  -- inverse() that inverts the fraction (e.g. 2/3 to 3/2)
+  -- reduce() that computes the reduced form of the fraction (e.g. 3/12 to 1/4)
+
+- We also define one method to check if the fraction is proper or not.
+  -- isProper() checks if numerator is smaller than denominator and returns true or false.
+
+--------------Fraction.java --------------
+
+public class Fraction {
+  private int numerator;
+  private int denominator;
+
+  /* Constructor section */
+  Fraction() {  // default constructor
+      this.numerator = 1;
+      this.denominator = 1;
+  }
+
+  Fraction(int n) { // Another constructor
+      this.numerator = n;
+      this.denominator = 1;
+  }
+
+  Fraction(int n, int d) {
+    this.numerator = n;
+    this.denominator = d;
+  }
+
+  /* Setter section */
+  public void setNumerator(int n) {
+    this.numerator = n;
+  }
+
+  public void setDenominator(int d) {
+    this.denominator = d;
+  }
+
+  /* Getter section */
+  public int getNumerator() {
+    return this.numerator;
+  }
+
+  public int getDenominator() {
+    return this.denominator;
+  }
+
+  /* Print section */
+  public void print() {
+    System.out.println(&quot;The fraction is &quot; + this.numerator + &quot;/&quot; + this.denominator);
+
+  /* Features section */ 
+  <b>public void inverse() {</b>
+    <b>// Swap numerator and denominator. Trivial stuff.</b>
+  <b>}</b>
+
+  <b>public void reduce() {</b>
+    <b>// Implement your code here. Requires computation.</b>
+    <b>// Do it yourself.</b>
+  <b>}</b>
+
+  <b>public boolean isProper() {</b>
+    <b>// Check and return true or false. Trivial stuff.</b>
+  <b>} </b>
+}
+-------------------------------------------
+
+- Add more methods to compute the first 3 multiples, square, squareroot, etc
+
+- Create a new driver class &quot;Driver3.java&quot; and call these methods to check their working.
+    Fraction f3 = new Fraction(5,8);
+    f3.inverse();
+    if (f3.isProper())
+       System.out.println(&quot;True&quot;);
+    else
+       System.out.println(&quot;False&quot;);
+
+    Fraction f4 = new Fraction(3,12);
+    f4.reduce();</pre><h5 class="western">
+<span style="background: #ffff00">Non-mutable methods </span>
+</h5>
+<pre class="western"><span style="background: #ffff00">- Sometimes you may want to compute and return the inverse of a fraction rather than modifying the fraction itself.</span>
+<span style="background: #ffff00">  This is like saying: Don't invert yourself... Just give me what what your inverse is.</span>
+<span style="background: #ffff00">  </span>
+  <b>public Fraction computeInverse() { // returns a Fraction</b>
+    <b>Fraction inv = new Fraction(denominator, numerator);</b>
+    <b>return inv;</b>
+  <b>}</b>
+
+- Note: The two statements can be replaced by a single statement
+    return ( new Fraction(denominator, numerator) );
+
+- From the Driver this method can be called as follows
+    Fraction f5 = new Fraction(5,6);
+    Fraction f6 = f5.computeInverse();
+    f5.print();  // f5 remains the same
+    f6.print();  // f6 is the inverse of f5
+
+- The call f5.computeInverse() does not modify f5. Instead it returns a new fraction which is the inverse of f5.
+
+- You can remove the use of new variable f6 as follows.
+    Fraction f5 = new Fraction(5,6);
+    f5.print();
+    f5.computeInverse().print();
+
+- In a similar fashion implement non-mutable versions of other operations.</pre><h3 class="western">
+Step 6: Defining Interactions between Objects 
+</h3>
+<pre class="western">- Two or more objects can collaborate with each other to compute some result.
+  For example, two fractions can be added to compute the sum.
+
+- This can be accomplished by adding methods which take the other objects as arguments.
+
+--------------Fraction.java --------------
+
+public class Fraction {
+  private int numerator;
+  private int denominator;
+
+    .................
+    .................
+  
+  public Fraction add(Fraction frac) {
+    // This method can currently handle only fractions with same base
+    int numerSum;
+    if ( this.denominator == frac.getDenominator() ) {
+      numerSum = this.numerator + frac.getNumerator();
+      Fraction sum = new Fraction(numerSum, this.denominator);
+      return sum;
+    } 
+    else
+      return null;
+  }
+}
+-------------------------------------------
+
+- The driver code as follows
+  Fraction f1 = new Fraction(2,7);
+  Fraction f2 = new Fraction(3,7);
+  Fraction f3 = f1.add(f2);  // same as f2.add(f1)
+  if (f3 != null)
+    f3.print();
+  else
+    System.out.println(&quot;Can add only fractions with same base&quot;);
+
+- Try giving fractions with different bases as input and check it out. 
+
+- Also, what happens if you don't have the if ... else condition. Check.
+
+- In a similar fashion implement methods to subtract, multiply and divide two fractions.
+
+- Division can be implemented by using inverse and multiply methods defined already.
+
+- Implement driver to check composite operations like f1.add(f2.inverse()).reduce().multiply(f3).print()
+
+- f1.multiply(computeInverse(f1)).print() should output fraction that has same numerator and denominator.
+
+- Play around and deepen your understanding. You need to get comfortable.</pre><h3 class="western">
+Step 7: Static Methods 
+</h3>
+<pre class="western">- Static methods (as well as static attributes) belong to a class rather than an object.
+  It is invoked using the class name and not the object instance.
+
+- The add method above can also be implemented in the following way.
+
+  <b>public static Fraction add (Fraction first, Fraction second) {</b>
+      <b>int numerSum;</b>
+      <b>if ( first.getDenominator() == second.getDenominator() ) {</b>
+        <b>numerSum = first.getNumerator() + second.getNumerator()</b>
+        <b>return ( new Fraction(numerSum, first.getDenominator()) );</b>
+      <b>}</b>
+      <b>else {</b>
+        <b>// Your code to implement in this case</b>
+      <b>}        </b>
+  <b>}</b>
+
+- The driver code is as follows
+      Fraction f1 = new Fraction(5,8);
+      Fraction f2 = new Fraction(2,8);
+      Fraction f3 = <b>Fraction.add</b>(f1,f2); // Note 'Fraction.add()'
+      f3.print();
+
+- It is not hard to improve the add() method to compute sum even if denominators are different.
+  Try to implement. Make use of the existing methods like multiply() to achieve this.
+
+- Conversion of fractions to same base is required for subtraction too. Hence it is a good idea 
+  to implement a separate 'convert()' method that can be used by both add() and subtract().
+
+- Note: It is a good programming practice to <b>avoid</b> using static methods.
+  It sort of kills the spirit of object oriented programming.</pre><h3 class="western">
+Step 8: Static variables (or attributes) 
+</h3>
+<pre class="western">- <span style="background: #ffff00">Like static methods, static varibles belong to a class not to any particular object instance.</span>
+
+-<font color="#000000"><span style="background: #ffff00"> Static variables can only be accessed by static methods. For example, consider the class.</span></font>
+
+- Lets define a static variable 'count' to keep track of number of Fraction objects created.
+
+- We also define a static method incrementCount() which is invoked in each constructor.
+  Note: The constructor is called each time an object is instantiated. So count is incremented.
+
+public class Fraction {
+  private int numerator;
+  private int denominator;
+  <b>private static int count = 0; </b>
+
+  Fraction() {  // default constructor
+      this.numerator = 1;
+      this.denominator = 1;
+      <b>incrementCount();</b>
+  }
+
+  Fraction(int n) { // Another constructor
+      this.numerator = n;
+      this.denominator = 1;
+      <b>incrementCount();</b>
+  }
+
+  Fraction(int n, int d) {
+    this.numerator = n;
+    this.denominator = d;
+    <b>incrementCount();</b>
+  }
+
+    .................
+    .................
+
+  <b>public static void incrementCount() {</b>
+    <b>count++;</b>
+  <b>}</b>
+
+  <b>public static void printCount() {</b>
+     <b>System.out.println(&quot;count = &quot; + count);</b>
+  <b>}</b>
+}
+
+- The driver code as follows
+      Fraction.printCount();  // Should print 0
+      Fraction f1 = new Fraction(2,3);
+      Fraction.printCount();
+      Fraction f2 = new Fraction();
+      Fraction.printCount();
+
+- Since a 'static' attribute belongs to the class, you cannot initialize it  using constructor.
+  The value has to be assigned while the attribute is declared itself.
+
+- Since incrementCount() needs to be called only when a constructor is called, it is safer
+  to make it private so that it cannot be called from outside (i.e. Driver).
+  <b>private</b> static void incrementCount() {
+    count++;
+  }</pre><h3 class="western">
+Step 9: Working with Array of Objects 
+</h3>
+<pre class="western">- An array is a container object that holds a fixed number of values of a single type
+
+- The length of an array is established when an array is created. After creation its length is fixed.
+
+- We will now create an array of fractions in Driver5.java.
+    <b>Fraction[] fracArray = new Fraction[5]; </b>
+
+  This creates a single array object that can hold/contain 5 Fraction objects.
+
+- Each of the 5 Fraction object has to be created explicitly.
+    <b>fracArray[0] = new Fraction(2,5); </b> // creates the first fraction
+    <b>fracArray[2] = new Fraction(); </b>  // creates the third fraction (1/1 set by default)
+    <b>fracArray[3] = new Fraction(4); </b> // creates the 4th fraction (4/1 is set)
+
+- The methods of these objects can be called to manipulate the fractions. For example
+    fracArray[0].inverse().print();  // prints 5/2
+    fracArray[2].multiply(fracArray[3]).print()  // prints 4
+
+- Try calling <b>fracArray[1].print();</b>  // Check what happens - Object not created
+
+- Try calling <b>fracArray[7].print();</b> // Check what happens - Out of bounds
+
+- Try <b>System.out.println(fracArray.length);</b>  // What happens
+
+- Loop through the array to assign, manipulate and print the fractions. 
+  Get comforable working with arrays.</pre><h5 class="western">
+Arrays of primitive data types 
+</h5>
+<pre class="western">- For working with arrays of primitive data types creation of array object is enough. For example.
+
+     int[] intArray = new int[5];
+     intArray[0] = 100;
+     intArray[1] = 200;
+           :
+           :
+
+- Primitive data types: byte, short, int, float, double, boolean, char, String
+  String is an object but treated as primitive for all practical purposes. It will be discussed later.
+
+- Direct initialization of primitive data types is also possible
+
+    float[] floatArray = {2.8, 3.5, 15.6, 7.99}; // floatArray.length is automatically set to 4
+    char[] charArray = {'a', 'b', 'c'};  // charArray.length is set 3
+</pre><h3 class="western">
+Step 10: Generating documentation 
+</h3>
+<pre class="western">- You can generate the documentation for the Fraction class by issuing the following command.
+    CMD&gt; javadoc -d docs Fraction.java // Generates lot of files including Fraction.html in docs folder
+
+- Open Fraction.html in a browser. It contains the necessary information for an user to know
+  what all functionalities are supported by Fraction so that they can use it.
+
+- You don't have to write a separate manual stating what functionalities are supported by your class.
+  It is automatically created by javadoc.
+
+- Take your time to understand what is in the html page.
+
+- Are private attributes or methods mentioned in the html? Now change an attribute to public.
+    <b>public</b> int numerator;
+
+- Run javadoc, regenerate Fraction.html and check.
+
+- Now in Fraction.java, just above the add method include a comment using /** ... */
+    <b>/** This method adds two fractions and returns the sum */ </b>
+    public Fraction add(Fraction frac) {
+        // Your code
+    }
+
+- Run javadoc, regenerate Fraction.html and check. Adding comments help!!
+
+- For more features of javadoc and its usage check out the web
+ </pre><p>
+<font size="2" style="font-size: 10pt">For corrections and
+suggestions, please email to swaminathanj@am.amrita.edu. Last
+updated: 19-Jul-2016</font> 
+</p>
+</body>
+</html>

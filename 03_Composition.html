@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Composition</title>
+	<meta name="generator" content="LibreOffice 5.1.4.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2016-11-06T14:18:42.351526835"/>
+	<meta name="" content=""/>
+	<!-- Aum Amriteswaryai Namah -->
+	<style type="text/css">
+		h2.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h2.ctl { font-family: "FreeSans" }
+		h3.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h3.ctl { font-family: "FreeSans" }
+		pre.cjk { font-family: "Nimbus Mono L", monospace }
+	</style>
+</head>
+<body lang="en-IN" dir="ltr">
+<h2 class="western">Composition</h2>
+<p>Composition is a way to combine simple objects or data types into
+more complex ones. Compositions are a critical building block of
+software development. <span style="background: #ffff00">Composition
+is about expressing relationships between objects. </span>Think about
+the chair example. A chair has a Seat. A chair has a back. And a
+chair has a set of legs. The phrase &quot;has a&quot; implies a
+relationship where the chair owns, or at minimum, uses, another
+object. <span style="background: #ffff00">It is this &quot;has a&quot;
+relationship which is the basis for composition. </span>
+</p>
+<h3 class="western">Embedding object inside a class</h3>
+<pre class="western">- Now that we have created a Fraction class we can use it to construct a larger class
+
+- We will define a class for working with matrix of fractions. In particular a 3x3 matrix
+  where each entity is a fraction.
+
+<b>Important Instructions</b>
+
+- Implement each functionality, test it out with a driver class and then the
+  next functionality with its driver, so on and so forth.
+
+- Your mantra should be:  <b>One functionality at a time </b>
+
+- Try to<span style="background: #ffff00"> reuse the existing code to the best possible extent. Don't reinvent the wheel.</span>
+  You already have class that implements methods to manipulate fractions. Use them.
+ 
+
+------------MatrixFraction.java-------------
+
+public class MatrixFraction {
+  private Fraction[][] matrixFrac;
+
+  // Constructor section
+
+  MatrixFraction() {  // default constructor - initializes to identity matrix
+      matrixFrac = new Fraction[3][3]; // First create array of 3x3 size
+      matrixFrac[0][0] = new Fraction(1,1); // Then populate the matrix
+      matrixFrac[0][1] = new Fraction(0,1);
+      matrixFrac[0][2] = new Fraction(0,1);
+      matrixFrac[1][0] = new Fraction(0,1);
+      matrixFrac[1][1] = new Fraction(1,1);
+      matrixFrac[1][2] = new Fraction(0,1);
+      matrixFrac[2][0] = new Fraction(0,1);
+      matrixFrac[2][1] = new Fraction(0,1);
+      matrixFrac[2][2] = new Fraction(1,1);
+  }
+
+  MatrixFraction(Fraction f00, Fraction f01, Fraction f02,
+                 Fraction f10, Fraction f11, Fraction f12,
+                 Fraction f20, Fraction f21, Fraction f22) {
+      matrixFrac = new Fraction[3][3]; // First create array of 3x3 size
+      matrixFrac[0][0] = f00;
+      matrixFrac[0][1] = f01;
+      matrixFrac[0][2] = f02;
+      matrixFrac[1][0] = f10;
+      matrixFrac[1][1] = f11;
+      matrixFrac[1][2] = f12;
+      matrixFrac[2][0] = f20;
+      matrixFrac[2][1] = f21;
+      matrixFrac[2][2] = f22;  
+  }
+
+  /** To set the values of all the elements of the matrix */
+  public void setMatrix(Fraction f00, Fraction f01, Fraction f02,
+                        Fraction f10, Fraction f11, Fraction f12,
+                        Fraction f20, Fraction f21, Fraction f22) {
+       // Your code here
+  }
+
+  /** To set the value of a particular element of the matrix */
+  public void setElement(Fraction frac, int row, int column) {
+       // Your code here
+  }
+
+  /** To get the value of a particular element of the matrix */
+  public Fraction getElement(int row, int column) {
+       // Your code here
+  }
+
+  /** To compute determinant */
+  public int determinant() {
+       // Your code here
+  }
+
+  /** To compute transpose (non-mutable) */
+  public MatrixFraction transpose() {
+       // Your code here
+  }
+
+  /** Check if this is an identity matrix */
+  public boolean isIdentity() {
+      // Your code here
+  }
+
+  /** Check if this is an upper triangular matrix */
+  public boolean isUpperTriangular() {
+      // Your code here
+  }
+
+  /** Check if this is a lower triangular matrix */
+  public boolean isLowerTriangular() {
+      // Your code here
+  }
+
+  /** Check if two matrices are same */
+  public boolean isSame(MatrixFraction mFrac) {
+      // Your code here
+  }
+
+  /** To compute the sum of two matrices */
+  public MatrixFraction add(MatrixFraction mFrac) {
+      // Your code here
+  }
+
+  /** To compute the difference between two matrices */
+  public MatrixFraction subtract(MatrixFraction mFrac) {
+      // Your code here
+  }
+
+  /** To compute the product of two matrices */
+  public MatrixFraction multiply(MatrixFraction mFrac) {
+      // Your code here
+  }
+
+  /** To compute a matrix with a scalar */
+  public MatrixFraction scalarMultiply(int scalar) {
+      // Your code here
+  }
+
+  /** To compute the inverse of a matrix */
+  public MatrixFraction scalarMultiply() {
+      // Your code here
+  }
+}  
+---------------------------------------------
+
+- Implement some more driver classes
+   -- to show commutativity property does not hold 
+   -- to show associative property holds
+   -- multiplication of a matrix with its inverse results in identity matrix
+   -- Any other interesting properties about matrices
+
+- Generate the documentation using javadoc
+</pre><p>
+<font size="2" style="font-size: 10pt">For corrections and
+suggestions, please email to swaminathanj@am.amrita.edu. Last
+updated: 19-Jul-2016</font></p>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Aum Amriteswaryai Namah -->
+
+<head>
+  <title>Organizing Code</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+
+<h2>Organizing Code</h2>
+
+<p>When you are writing large pieces of code, it is better to keep them in an organized manner. In Java, you do so by including them under different packages. Each package denotes a hierarchy of directory and you put related source files under each directory.</p>
+
+<h4>1. Grouping related classes under a package </h4>
+
+<pre>
+- Lets say current working directory: /home/user. We will create a package for fraction.
+
+- Create a folder structure at the current directory as follows: org/amrita/oop/fraction
+
+- Include the following statement at the top of Fraction.java, MatrixFraction.java, 
+  MixedFraction.java and ZeroDenominatorException.java
+      <b>package org.amrita.oop.fraction;</b>
+
+- Move Fraction.java, MatrixFraction.java, MixedFraction.java and ZeroDenominatorException.java 
+  to org/amrita/oop/fraction 
+
+- This requires a change in the way the code is compiled. The command is issued in
+  /home/user folder.
+
+  <b>CMD> javac org/amrita/oop/fraction/*.java</b> // for compilation
+
+  (This creates the respective .class files in org/amrita/oop/fraction)
+
+- In Driver.java include the following statement. Driver.java is in /home/user
+
+  <b>import org.amrita.oop.fraction;</b>
+
+- Compile and run Driver.java as usual
+
+- You may also move all the Driver files to a separate folder say, org/amrita/oop/fraction/test.
+
+- Include the following statement at the top in all the driver files/
+     package org.amrita.oop.fraction.test;
+
+  (meaning all the test driver files are located in this folder)
+
+- Compilation from /home/user (and not /home/test/org/amrita/oop/fraction/test)
+  CMD> javac org/amrita/oop/fraction/test/*.java
+
+- Running from /home/user
+  CMD> java org.amrita.oop.fraction.test.Driver3
+
+  (Note the dot. It is not slash. For compilation, you use slash. For run, dot.)
+
+- You can compile and run in the aforementioned manner as long as your current
+  folder is /home/user. If you want to run them from any folder, 
+  you have to do set the environment variable 'classpath'
+
+  CMD> export CLASSPATH=.:/home/user
+
+  (This enables the 'java' command to look for the class files in the
+  current directory '.' and /home/user)
+
+  CMD> java org.amrita.oop.fraction.test.Driver3
+  (This command will work from any directory)
+
+  For more on CLASSPATH, please look into any Java book.
+</pre>
+
+<h4>2. Moving the code to Eclipse </h4>
+
+<pre>
+- Open Eclipse
+
+- Create New Java Project. Project name can be "Fractions".
+
+- Import Fraction.java, MatrixFraction.java, MixedFraction.java and ZeroDenominatorException.java. 
+  The package structure will be created automatically.
+
+- Import all Driver classes
+
+- Right click each driver class and run it individually
+
+</pre>
+
+
+<small>For corrections and suggestions, please email to swaminathanj@am.amrita.edu. Last updated: 06-August-2016</small>

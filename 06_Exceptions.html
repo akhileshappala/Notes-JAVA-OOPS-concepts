@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Exceptions</title>
+	<meta name="generator" content="LibreOffice 5.1.4.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2016-11-07T20:53:52.639671823"/>
+	<meta name="" content=""/>
+	<!-- Aum Amriteswaryai Namah -->
+	<style type="text/css">
+		h2.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h2.ctl { font-family: "FreeSans" }
+		h3.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h3.ctl { font-family: "FreeSans" }
+		pre.cjk { font-family: "Nimbus Mono L", monospace }
+	</style>
+</head>
+<body lang="en-IN" dir="ltr">
+<h2 class="western">Exceptions</h2>
+<p><span style="background: #ffff00">An exception (or exceptional
+event) is a problem that arises during the execution of a program</span>.
+When an exception occurs the normal flow of the program is disrupted
+and the program/application terminates abnormally, which is not
+recommended, therefore these exceptions are to be handled.</p>
+<p>In Java,<span style="background: #ffff00"> exception is an event
+that disrupts the normal flow of the program. It is an object which
+is thrown at runtime. We will see how to define a custom (or new)
+exception, how to throw it when something goes wrong, and how to
+handle it when it arises during the execution.</span></p>
+<h3 class="western">Defining Exception</h3>
+<pre class="western">- We will define an exception that can be used by Fraction class:
+  ZeroDenominatorException 
+
+- This exception can be thrown when a denominator is set to 0 or when a computation 
+  results in denominator becoming 0.
+
+- You can define <b>ZeroDenominatorException</b> as follows:
+
+----------ZeroDenominatorException.java-----------
+
+<span style="background: #ffff00">public class ZeroDenominatorException extends Exception {</span>
+<span style="background: #ffff00">   ZeroDenominatorException(String s) {</span>
+<span style="background: #ffff00">      super(s);</span>
+<span style="background: #ffff00">   }</span>
+<span style="background: #ffff00">}</span>
+---------------------------------------------------
+
+- All exceptions are derived from Exception class. Exception class is part of
+  the Java library.
+</pre><h3 class="western">
+Throwing Exceptions</h3>
+<pre class="western">- Now pertinent methods in Fraction class must be updated to throw this exception.
+  This is done as follows.
+
+------------------Fraction.java--------------------
+<span style="background: #ffff00">class Fraction {</span>
+<span style="background: #ffff00">                     :</span>
+<span style="background: #ffff00">                     :</span>
+<span style="background: #ffff00">   public void setDenominator(int d) throws ZeroDenominatorException {</span>
+<span style="background: #ffff00">      if (d != 0)</span>
+<span style="background: #ffff00">         denominator = d;</span>
+<span style="background: #ffff00">      else</span>
+<span style="background: #ffff00">         throw new ZeroDenominatorException(&quot;Denominator cannot be zero&quot;);</span>
+<span style="background: #ffff00">   }</span>
+<span style="background: #ffff00">                     :</span>
+<span style="background: #ffff00">                     :</span>
+<span style="background: #ffff00">}</span>
+---------------------------------------------------
+
+<span style="background: #ffff00">- Create an instance ofZeroDenominatorException and throw it when d is 0.</span>
+
+- Not only setDenominator(), there may be other methods which has to throw this
+  exception like inverse(). If numerator was 0, inverting will cause it to make
+  denominator 0. Similarly, the constructor that takes denominator also must throw.
+
+- Implement changes to these methods appropriately.</pre><h3 class="western">
+Handling Exceptions</h3>
+<pre class="western">- Now, anyone who is using the Fraction class and invoking these methods should
+  catch the exception and decide the course of action. For example,
+     <span style="background: #ffff00"> </span><b><span style="background: #ffff00">try { </span></b>
+<span style="background: #ffff00">          f1.setDenominator(0);</span>
+<span style="background: #ffff00">      <b>} catch (ZeroDenominatorException zde) {</b></span>
+<span style="background: #ffff00">          <b>// Implement an appropriate action here</b></span>
+<span style="background: #ffff00">      <b>}</b></span>
+
+- Typically there are 3 kinds of actions taken
+  1. Simply exit the program by &quot;System.exit(0);&quot;
+
+  2. (a) Handle the Exception. You may print the message by calling zde.getMessage(). The method 
+     getMessage() is implemented in Exception class. And hence, it  can be called 
+     from the subclass ZeroDenominatorException that we defined. This will 
+     print the message &quot;Denominator cannot be &quot;0&quot; that we defined.
+
+     <span style="background: #ffff00">(b) You may also print the stack trace when the exception happended.</span>
+<span style="background: #ffff00">      This is done by calling zde.printStackTrace();</span>
+
+  3. Do not handle. Throw the exception in turn to the caller. 
+         public void setFraction() <b>throws ZeroDenominatorException</b> {
+            Fraction f1 = new Fraction();
+            f1.setNumerator(3);
+            f1.setDenominator(0); // Not in a try...catch block
+         }
+
+      Now when setDenominator(0) throws an exception callerMethod() will not
+      handle it. Instead it will throw to its caller. It is the 
+
+- You can write a driver program and test as follows.
+
+    public class Driver {
+       public static void main(String[] args) {
+          Fraction f1 = new Fraction();
+          f1.setNumerator(2);
+          try
+              f1.setDenominator(0);
+          }
+          catch(ZeroDenominatorException zde) {
+             zde.printStackTrace();
+          }
+       }
+    }
+
+- Since 0 is passed, setDenominator() throws the exception and the control shifts
+  to catch block. Here, we just print the exception and go on.
+
+-<span style="background: #ffff00"> If you don't call setDenominator()</span> within a try...catch block, the compiler will 
+  report an error. Try and check.
+
+- Classes in Java libraries define several exceptions such as IOException, 
+  ArrayIndexOutOfBoundsException, NullPointerException, etc.
+
+- These are thrown by certain methods which need to be caught and handled if you are using them.
+
+- How do you know if a particular method is going to throw an exception?
+  The documentation generated by javadoc will have this information.
+  Run 'javadoc Fraction.java' and check Fraction.html.
+
+- Exceptions in Java are of two types. (i) Checked (ii) Unchecked. Read about them.
+</pre><p>
+<font size="2" style="font-size: 10pt">For corrections and
+suggestions, please email to swaminathanj@am.amrita.edu. Last
+updated: 06-August-2016</font></p>
+</body>
+</html>

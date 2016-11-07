@@ -1,0 +1,944 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Java Applets</title>
+	<meta name="generator" content="LibreOffice 5.1.4.2 (Linux)"/>
+	<meta name="created" content="00:00:00"/>
+	<meta name="changed" content="2016-11-03T11:20:26.932555742"/>
+	<meta name="" content=""/>
+	<!-- Aum Amriteswaryai Namah -->
+	<style type="text/css">
+		h3.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h3.ctl { font-family: "FreeSans" }
+		pre.cjk { font-family: "Nimbus Mono L", monospace }
+		h4.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h4.ctl { font-family: "FreeSans" }
+		h2.cjk { font-family: "Noto Sans CJK SC Regular" }
+		h2.ctl { font-family: "FreeSans" }
+		code.cjk { font-family: "Nimbus Mono L", monospace }
+	</style>
+</head>
+<body lang="en-IN" dir="ltr">
+<p><b>Please note: Content is from
+http://www.javatpoint.com/java-applet</b></p>
+<p><b>Borrowed and shown due to lack of internet connectivity in the
+lab. Thank you JavatPoint!</b></p>
+<h1>Java Applet</h1>
+<p>Applet is a special type of program that is embedded in the
+webpage to generate the dynamic content. It runs inside the browser
+and works at client side.</p>
+<h3 class="western">Advantage of Applet</h3>
+<p>There are many advantages of applet. They are as follows:</p>
+<ul>
+	<li/>
+<p style="margin-bottom: 0cm">It works at client side so less
+	response time. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm">Secured 
+	</p>
+	<li/>
+<p>It can be executed by browsers running under many
+	plateforms, including Linux, Windows, Mac Os etc. 
+	</p>
+</ul>
+<h3 class="western">Drawback of Applet</h3>
+<ul>
+	<li/>
+<p>Plugin is required at client browser to execute applet. 
+	</p>
+</ul>
+<p><br/>
+<br/>
+Do You Know 
+</p>
+<div id="youknow" dir="ltr">
+	<ul>
+		<li/>
+<p style="margin-bottom: 0cm">Who is responsible to manage
+		the life cycle of an applet ? 
+		</p>
+		<li/>
+<p style="margin-bottom: 0cm">How to perform animation in
+		applet ? 
+		</p>
+		<li/>
+<p style="margin-bottom: 0cm">How to paint like paint brush
+		in applet ? 
+		</p>
+		<li/>
+<p style="margin-bottom: 0cm">How to display digital clock in
+		applet ? 
+		</p>
+		<li/>
+<p style="margin-bottom: 0cm">How to display analog clock in
+		applet ? 
+		</p>
+		<li/>
+<p>How to communicate two applets ? 
+		</p>
+	</ul>
+</div>
+<h3 class="western">Hierarchy of Applet</h3>
+<p style="margin-bottom: 0cm"><img src="data:" name="Image1" alt="hierarchy of applet" align="bottom" width="75" height="38" border="0"/>
+
+</p>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<p>As displayed in the above diagram, Applet class extends Panel.
+			Panel class extends Container which is the subclass of Component. 
+			</p>
+		</td>
+	</tr>
+</table>
+<hr/>
+
+<h3 class="western">Lifecycle of Java Applet</h3>
+<ol>
+	<li/>
+<p style="margin-bottom: 0cm">Applet is initialized. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm">Applet is started. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm">Applet is painted. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm">Applet is stopped. 
+	</p>
+	<li/>
+<p>Applet is destroyed. 
+	</p>
+</ol>
+<hr/>
+
+<h3 class="western">Lifecycle methods for Applet:</h3>
+<p>The java.applet.Applet class 4 life cycle methods and
+java.awt.Component class provides 1 life cycle methods for an applet.
+</p>
+<h3 class="western">java.applet.Applet class</h3>
+<p>For creating any applet java.applet.Applet class must be
+inherited. It provides 4 life cycle methods of applet.</p>
+<ol>
+	<li/>
+<p style="margin-bottom: 0cm"><strong>public void init():</strong>
+	is used to initialized the Applet. It is invoked only once. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm"><strong>public void start():</strong>
+	is invoked after the init() method or browser is maximized. It is
+	used to start the Applet. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm"><strong>public void stop():</strong>
+	is used to stop the Applet. It is invoked when Applet is stop or
+	browser is minimized. 
+	</p>
+	<li/>
+<p><strong>public void destroy():</strong> is used to destroy
+	the Applet. It is invoked only once. 
+	</p>
+</ol>
+<h3 class="western">java.awt.Component class</h3>
+<p>The Component class provides 1 life cycle method of applet.</p>
+<ol>
+	<li/>
+<p><strong>public void paint(Graphics g):</strong> is used to
+	paint the Applet. It provides Graphics class object that can be used
+	for drawing oval, rectangle, arc etc. 
+	</p>
+</ol>
+<hr/>
+
+<h3 class="western">Who is responsible to manage the life cycle of an
+applet?</h3>
+<p>Java Plug-in software.</p>
+<hr/>
+
+<h3 class="western">How to run an Applet?</h3>
+<p>There are two ways to run an applet</p>
+<ol>
+	<li/>
+<p style="margin-bottom: 0cm">By html file. 
+	</p>
+	<li/>
+<p>By appletViewer tool (for testing purpose). 
+	</p>
+</ol>
+<hr/>
+
+<h3 class="western">Simple example of Applet by html file:</h3>
+<p>To execute the applet by html file, create an applet and compile
+it. After that create an html file and place the applet code in html
+file. Now click the html file.</p>
+<pre class="western">
+<code class="western">//First.java</code>
+<code class="western">import java.applet.Applet;</code>
+<code class="western">import java.awt.Graphics;</code>
+<code class="western">public class First extends Applet{</code>
+
+<code class="western">public void paint(Graphics g){</code>
+<code class="western">g.drawString(&quot;welcome&quot;,150,150);</code>
+<code class="western">}</code>
+
+<code class="western">}</code>
+</pre><h4 class="western">
+<a name="n"></a>Note: class must be public because its object is
+created by Java Plugin software that resides on the browser.</h4>
+<h3 class="western">myapplet.html</h3>
+<pre class="western">
+
+<code class="western">&lt;html&gt;</code>
+<code class="western">&lt;body&gt;</code>
+<code class="western">&lt;applet code=&quot;First.class&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</code>
+<code class="western">&lt;/applet&gt;</code>
+<code class="western">&lt;/body&gt;</code>
+<code class="western">&lt;/html&gt;</code>
+</pre>
+<hr/>
+
+<h3 class="western">Simple example of Applet by appletviewer tool:</h3>
+<p>To execute the applet by appletviewer tool, create an applet that
+contains applet tag in comment and compile it. After that run it by:
+appletviewer First.java. Now Html file is not required but it is for
+testing purpose only.</p>
+<pre class="western">
+<code class="western">//First.java</code>
+<code class="western">import java.applet.Applet;</code>
+<code class="western">import java.awt.Graphics;</code>
+<code class="western">public class First extends Applet{</code>
+
+<code class="western">public void paint(Graphics g){</code>
+<code class="western">g.drawString(&quot;welcome to applet&quot;,150,150);</code>
+<code class="western">}</code>
+
+<code class="western">}</code>
+<code class="western">/*</code>
+<code class="western">&lt;applet code=&quot;First.class&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</code>
+<code class="western">&lt;/applet&gt;</code>
+<code class="western">*/</code></pre><p>
+To execute the applet by appletviewer tool, write in command prompt:</p>
+<pre class="western"><strong>c:\&gt;</strong>javac First.java
+<strong>c:\&gt;</strong>appletviewer First.java</pre>
+<hr/>
+
+<h1>Displaying Graphics in Applet</h1>
+<p>java.awt.Graphics class provides many methods for graphics
+programming.</p>
+<h2 class="western">Commonly used methods of Graphics class:</h2>
+<ol>
+	<li/>
+<p style="margin-bottom: 0cm"><strong>public abstract void
+	drawString(String str, int x, int y):</strong> is used to draw the
+	specified string. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm"><strong>public void drawRect(int
+	x, int y, int width, int height):</strong> draws a rectangle with
+	the specified width and height. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm"><strong>public abstract void
+	fillRect(int x, int y, int width, int height):</strong> is used to
+	fill rectangle with the default color and specified width and
+	height. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm"><strong>public abstract void
+	drawOval(int x, int y, int width, int height):</strong> is used to
+	draw oval with the specified width and height. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm"><strong>public abstract void
+	fillOval(int x, int y, int width, int height):</strong> is used to
+	fill oval with the default color and specified width and height. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm"><strong>public abstract void
+	drawLine(int x1, int y1, int x2, int y2):</strong> is used to draw
+	line between the points(x1, y1) and (x2, y2). 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm"><strong>public abstract boolean
+	drawImage(Image img, int x, int y, ImageObserver observer):</strong>
+	is used draw the specified image. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm"><strong>public abstract void
+	drawArc(int x, int y, int width, int height, int startAngle, int
+	arcAngle):</strong> is used draw a circular or elliptical arc. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm"><strong>public abstract void
+	fillArc(int x, int y, int width, int height, int startAngle, int
+	arcAngle):</strong> is used to fill a circular or elliptical arc. 
+	</p>
+	<li/>
+<p style="margin-bottom: 0cm"><strong>public abstract void
+	setColor(Color c):</strong> is used to set the graphics current
+	color to the specified color. 
+	</p>
+	<li/>
+<p><strong>public abstract void setFont(Font font):</strong>
+	is used to set the graphics current font to the specified font. 
+	</p>
+</ol>
+<h2 class="western">Example of Graphics in applet:</h2>
+<p> 
+</p>
+<pre class="western">
+
+<code class="western">import java.applet.Applet;</code>
+<code class="western">import java.awt.*;</code>
+
+<code class="western">public class GraphicsDemo extends Applet{</code>
+
+<code class="western">public void paint(Graphics g){</code>
+<code class="western">g.setColor(Color.red);</code>
+<code class="western">g.drawString(&quot;Welcome&quot;,50, 50);</code>
+<code class="western">g.drawLine(20,30,20,300);</code>
+<code class="western">g.drawRect(70,100,30,30);</code>
+<code class="western">g.fillRect(170,100,30,30);</code>
+<code class="western">g.drawOval(70,200,30,30);</code>
+
+<code class="western">g.setColor(Color.pink);</code>
+<code class="western">g.fillOval(170,200,30,30);</code>
+<code class="western">g.drawArc(90,150,30,30,30,270);</code>
+<code class="western">g.fillArc(270,150,30,30,0,180);</code>
+
+<code class="western">}</code>
+<code class="western">}</code></pre><h3 class="western">
+myapplet.html</h3>
+<pre class="western">
+<code class="western">&lt;html&gt;</code>
+<code class="western">&lt;body&gt;</code>
+<code class="western">&lt;applet code=&quot;GraphicsDemo.class&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</code>
+<code class="western">&lt;/applet&gt;</code>
+<code class="western">&lt;/body&gt;</code>
+<code class="western">&lt;/html&gt;</code>
+</pre>
+<hr/>
+
+<h1>Displaying Image in Applet</h1>
+<p>Applet is mostly used in games and animation. For this purpose
+image is required to be displayed. The java.awt.Graphics class
+provide a method drawImage() to display the image.</p>
+<h2 class="western">Syntax of drawImage() method:</h2>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<ol>
+				<li/>
+<p><strong>public abstract boolean drawImage(Image img, int
+				x, int y, ImageObserver observer):</strong> is used draw the
+				specified image. 
+				</p>
+			</ol>
+		</td>
+	</tr>
+</table>
+<h2 class="western">How to get the object of Image:</h2>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<p>The java.applet.Applet class provides getImage() method that
+			returns the object of Image. Syntax: 
+			</p>
+		</td>
+	</tr>
+</table>
+<pre class="western">
+<code class="western">public Image getImage(URL u, String image){}</code>
+</pre><h2 class="western">
+Other required methods of Applet class to display image:</h2>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<ol>
+				<li/>
+<p style="margin-bottom: 0cm"><strong>public URL
+				getDocumentBase():</strong> is used to return the URL of the
+				document in which applet is embedded. 
+				</p>
+				<li/>
+<p><strong>public URL getCodeBase():</strong> is used to
+				return the base URL. 
+				</p>
+			</ol>
+		</td>
+	</tr>
+</table>
+<hr/>
+
+<h2 class="western">Example of displaying image in applet:</h2>
+<p> 
+</p>
+<pre class="western">
+<code class="western">import java.awt.*;</code>
+<code class="western">import java.applet.*;</code>
+
+
+<code class="western">public class DisplayImage extends Applet {</code>
+
+<code class="western">  </code><code class="western">Image picture;</code>
+
+<code class="western">  </code><code class="western">public void init() {</code>
+<code class="western">    </code><code class="western">picture = getImage(getDocumentBase(),&quot;sonoo.jpg&quot;);</code>
+<code class="western">  </code><code class="western">}</code>
+<code class="western">  </code>
+<code class="western">  </code><code class="western">public void paint(Graphics g) {</code>
+<code class="western">    </code><code class="western">g.drawImage(picture, 30,30, this);</code>
+<code class="western">  </code><code class="western">}</code>
+<code class="western">    </code>
+<code class="western">  </code><code class="western">}</code>
+</pre>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<p>In the above example, drawImage() method of Graphics class is
+			used to display the image. The 4th argument of drawImage() method
+			of is ImageObserver object. The Component class implements
+			ImageObserver interface. So current class object would also be
+			treated as ImageObserver because Applet class indirectly extends
+			the Component class.</p>
+		</td>
+	</tr>
+</table>
+<h3 class="western">myapplet.html</h3>
+<pre class="western">
+
+<code class="western">&lt;html&gt;</code>
+<code class="western">&lt;body&gt;</code>
+<code class="western">&lt;applet code=&quot;DisplayImage.class&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</code>
+<code class="western">&lt;/applet&gt;</code>
+<code class="western">&lt;/body&gt;</code>
+<code class="western">&lt;/html&gt;</code>
+</pre>
+<hr/>
+
+<h1>Animation in Applet</h1>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<p>Applet is mostly used in games and animation. For this purpose
+			image is required to be moved.</p>
+		</td>
+	</tr>
+</table>
+<p> 
+</p>
+<h2 class="western">Example of animation in applet:</h2>
+<pre class="western"><code class="western"> </code>
+
+<code class="western">import java.awt.*;</code>
+<code class="western">import java.applet.*;</code>
+<code class="western">public class AnimationExample extends Applet {</code>
+
+<code class="western">  </code><code class="western">Image picture;</code>
+
+<code class="western">  </code><code class="western">public void init() {</code>
+<code class="western">    </code><code class="western">picture =getImage(getDocumentBase(),&quot;bike_1.gif&quot;);</code>
+<code class="western">  </code><code class="western">}</code>
+<code class="western">  </code>
+<code class="western">  </code><code class="western">public void paint(Graphics g) {</code>
+<code class="western">    </code><code class="western">for(int i=0;i&lt;500;i++){</code>
+<code class="western">      </code><code class="western">g.drawImage(picture, i,30, this);</code>
+
+<code class="western">      </code><code class="western">try{Thread.sleep(100);}catch(Exception e){}</code>
+<code class="western">    </code><code class="western">}</code>
+<code class="western">  </code><code class="western">}</code>
+<code class="western">}</code>
+</pre>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<p>In the above example, drawImage() method of Graphics class is
+			used to display the image. The 4th argument of drawImage() method
+			of is ImageObserver object. The Component class implements
+			ImageObserver interface. So current class object would also be
+			treated as ImageObserver because Applet class indirectly extends
+			the Component class.</p>
+		</td>
+	</tr>
+</table>
+<h3 class="western">myapplet.html</h3>
+<pre class="western">
+
+<code class="western">&lt;html&gt;</code>
+<code class="western">&lt;body&gt;</code>
+<code class="western">&lt;applet code=&quot;DisplayImage.class&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</code>
+<code class="western">&lt;/applet&gt;</code>
+<code class="western">&lt;/body&gt;</code>
+<code class="western">&lt;/html&gt;</code>
+</pre>
+<hr/>
+
+<h1>EventHandling in Applet</h1>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<p>As we perform event handling in AWT or Swing, we can perform it
+			in applet also. Let's see the simple example of event handling in
+			applet that prints a message by click on the button.</p>
+		</td>
+	</tr>
+</table>
+<h2 class="western">Example of EventHandling in applet:</h2>
+<p> 
+</p>
+<pre class="western">
+
+<code class="western">import java.applet.*;</code>
+<code class="western">import java.awt.*;</code>
+<code class="western">import java.awt.event.*;</code>
+<code class="western">public class EventApplet extends Applet implements ActionListener{</code>
+<code class="western">Button b;</code>
+<code class="western">TextField tf;</code>
+
+<code class="western">public void init(){</code>
+<code class="western">tf=new TextField();</code>
+<code class="western">tf.setBounds(30,40,150,20);</code>
+
+<code class="western">b=new Button(&quot;Click&quot;);</code>
+<code class="western">b.setBounds(80,150,60,50);</code>
+
+<code class="western">add(b);add(tf);</code>
+<code class="western">b.addActionListener(this);</code>
+
+<code class="western">setLayout(null);</code>
+<code class="western">}</code>
+
+<code class="western"> </code><code class="western">public void actionPerformed(ActionEvent e){</code>
+<code class="western">  </code><code class="western">tf.setText(&quot;Welcome&quot;);</code>
+<code class="western"> </code><code class="western">} </code>
+<code class="western">}</code>
+</pre>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<p>In the above example, we have created all the controls in
+			init() method because it is invoked only once.</p>
+		</td>
+	</tr>
+</table>
+<h3 class="western">myapplet.html</h3>
+<pre class="western"><code class="western"> </code>
+
+<code class="western">&lt;html&gt;</code>
+<code class="western">&lt;body&gt;</code>
+<code class="western">&lt;applet code=&quot;EventApplet.class&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</code>
+<code class="western">&lt;/applet&gt;</code>
+<code class="western">&lt;/body&gt;</code>
+<code class="western">&lt;/html&gt;</code>
+</pre>
+<hr/>
+
+<h1>JApplet class in Applet</h1>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<p>As we prefer Swing to AWT. Now we can use JApplet that can have
+			all the controls of swing. The JApplet class extends the Applet
+			class.</p>
+		</td>
+	</tr>
+</table>
+<h2 class="western">Example of EventHandling in JApplet:</h2>
+<p> 
+</p>
+<pre class="western"><code class="western"> </code>
+
+<code class="western">import java.applet.*;</code>
+<code class="western">import</code><code class="western"><span style="background: #ffff00"> javax</span></code><code class="western">.swing.*;</code>
+<code class="western">import java.awt.event.*;</code>
+<code class="western">public class EventJApplet extends JApplet implements</code><code class="western"><span style="background: #ffff00"> ActionListene</span></code><code class="western">r{</code>
+<code class="western">JButton b;</code>
+<code class="western">JTextField tf;</code>
+<code class="western">public void init(){</code>
+
+<code class="western">tf=new JTextField();</code>
+<code class="western">tf.setBounds(30,40,150,20);</code>
+
+<code class="western">b=new JButton(&quot;Click&quot;);</code>
+<code class="western">b.setBounds(80,150,70,40);</code>
+
+<code class="western"><span style="background: #ffff00">add(b);add(tf);</span></code>
+<code class="western"><span style="background: #ffff00">b.addActionListener(this);</span></code>
+
+<code class="western"><span style="background: #ffff00">setLayout(null)</span></code><code class="western">;</code>
+<code class="western">}</code>
+
+<code class="western"><span style="background: #ffff00">public void actionPerformed(ActionEvent e){</span></code>
+<code class="western"><span style="background: #ffff00">tf.setText(&quot;Welcome&quot;);</span></code>
+<code class="western"><span style="background: #ffff00">}</span></code>
+<code class="western">}</code>
+</pre>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<p>In the above example, we have created all the controls in
+			init() method because it is invoked only once.</p>
+		</td>
+	</tr>
+</table>
+<h3 class="western">myapplet.html</h3>
+<pre class="western"><code class="western"> </code>
+
+<code class="western">&lt;html&gt;</code>
+<code class="western">&lt;body&gt;</code>
+<code class="western">&lt;applet code=&quot;EventJApplet.class&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</code>
+<code class="western">&lt;/applet&gt;</code>
+<code class="western">&lt;/body&gt;</code>
+<code class="western">&lt;/html&gt;</code>
+</pre>
+<hr/>
+
+<h1>Painting in Applet</h1>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<p>We can perform painting operation in applet by the
+			mouseDragged() method of MouseMotionListener.</p>
+		</td>
+	</tr>
+</table>
+<h2 class="western">Example of Painting in Applet:</h2>
+<p> 
+</p>
+<pre class="western"><code class="western"> </code>
+
+<code class="western">import java.awt.*;</code>
+<code class="western">import java.awt.event.*;</code>
+<code class="western">import java.applet.*;</code>
+<code class="western">public class MouseDrag extends Applet implements </code><code class="western"><span style="background: #ffff00">MouseMotionListener</span></code><code class="western">{</code>
+
+<code class="western">public void init(){</code>
+<code class="western">addMouseMotionListener(this);</code>
+<code class="western">setBackground(Color.red);</code>
+<code class="western">}</code>
+
+<code class="western">public void mouseDragged(MouseEvent me){</code>
+<code class="western">Graphics g=getGraphics();</code>
+<code class="western">g.setColor(Color.white);</code>
+<code class="western">g.fillOval(me.getX(),me.getY(),5,5);</code>
+<code class="western">}</code>
+<code class="western">public void mouseMoved(MouseEvent me){}</code>
+
+<code class="western">}</code>
+</pre>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<p>In the above example, getX() and getY() method of MouseEvent is
+			used to get the current x-axis and y-axis. The getGraphics()
+			method of Component class returns the object of Graphics.</p>
+		</td>
+	</tr>
+</table>
+<h3 class="western">myapplet.html</h3>
+<pre class="western"><code class="western"> </code>
+
+<code class="western">&lt;html&gt;</code>
+<code class="western">&lt;body&gt;</code>
+<code class="western">&lt;applet code=&quot;MouseDrag.class&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</code>
+<code class="western">&lt;/applet&gt;</code>
+<code class="western">&lt;/body&gt;</code>
+<code class="western">&lt;/html&gt;</code>
+</pre>
+<hr/>
+
+<h1>Digital clock in Applet</h1>
+<p>Digital clock can be created by using the Calendar and
+SimpleDateFormat class. Let's see the simple example:</p>
+<h2 class="western">Example of Digital clock in Applet:</h2>
+<p> 
+</p>
+<pre class="western"><code class="western"> </code>
+
+<code class="western">import java.applet.*;</code>
+<code class="western">import java.awt.*;</code>
+<code class="western">import java.util.*;</code>
+<code class="western">import java.text.*;</code>
+
+<code class="western">public class DigitalClock extends Applet implements Runnable {</code>
+
+<code class="western">   </code><code class="western">Thread t = null;</code>
+<code class="western">   </code><code class="western">int hours=0, minutes=0, seconds=0;</code>
+<code class="western">   </code><code class="western">String timeString = &quot;&quot;;</code>
+
+<code class="western">   </code><code class="western">public void init() {</code>
+<code class="western">      </code><code class="western">setBackground( Color.green);</code>
+<code class="western">   </code><code class="western">}</code>
+
+<code class="western">   </code><code class="western">public void start() {</code>
+<code class="western">        </code><code class="western">t = new Thread( this );</code>
+<code class="western">        </code><code class="western">t.start();</code>
+<code class="western">   </code><code class="western">}</code>
+
+<code class="western">  </code>
+<code class="western">   </code><code class="western">public void run() {</code>
+<code class="western">      </code><code class="western">try {</code>
+<code class="western">         </code><code class="western">while (true) {</code>
+
+<code class="western">            </code><code class="western">Calendar cal = Calendar.getInstance();</code>
+<code class="western">            </code><code class="western">hours = cal.get( Calendar.HOUR_OF_DAY );</code>
+<code class="western">            </code><code class="western">if ( hours &gt; 12 ) hours -= 12;</code>
+<code class="western">            </code><code class="western">minutes = cal.get( Calendar.MINUTE );</code>
+<code class="western">            </code><code class="western">seconds = cal.get( Calendar.SECOND );</code>
+
+<code class="western">            </code><code class="western">SimpleDateFormat formatter = new SimpleDateFormat(&quot;hh:mm:ss&quot;);</code>
+<code class="western">            </code><code class="western">Date date = cal.getTime();</code>
+<code class="western">            </code><code class="western">timeString = formatter.format( date );</code>
+
+<code class="western">            </code><code class="western">repaint();</code>
+<code class="western">            </code><code class="western">t.sleep( 1000 );  // interval given in milliseconds</code>
+<code class="western">         </code><code class="western">}</code>
+<code class="western">      </code><code class="western">}</code>
+<code class="western">      </code><code class="western">catch (Exception e) { }</code>
+<code class="western">   </code><code class="western">}</code>
+
+<code class="western">  </code>
+<code class="western">  </code><code class="western">public void paint( Graphics g ) {</code>
+<code class="western">      </code><code class="western">g.setColor( Color.blue );</code>
+<code class="western">      </code><code class="western">g.drawString( timeString, 50, 50 );</code>
+<code class="western">   </code><code class="western">}</code>
+<code class="western">}</code>
+</pre>
+<table cellpadding="2" cellspacing="2">
+	<tr>
+		<td style="border: none; padding: 0cm">
+			<p>In the above example, getX() and getY() method of MouseEvent is
+			used to get the current x-axis and y-axis. The getGraphics()
+			method of Component class returns the object of Graphics.</p>
+		</td>
+	</tr>
+</table>
+<h3 class="western">myapplet.html</h3>
+<pre class="western"><code class="western"> </code>
+
+<code class="western">&lt;html&gt;</code>
+<code class="western">&lt;body&gt;</code>
+<code class="western">&lt;applet code=&quot;DigitalClock.class&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</code>
+<code class="western">&lt;/applet&gt;</code>
+<code class="western">&lt;/body&gt;</code>
+<code class="western">&lt;/html&gt;</code>
+</pre>
+<hr/>
+
+<h1>Analog clock in Applet</h1>
+<p>Analog clock can be created by using the Math class. Let's see the
+simple example:</p>
+<h2 class="western">Example of Analog clock in Applet:</h2>
+<p> 
+</p>
+<pre class="western"><code class="western"> </code>
+
+<code class="western">import java.applet.*;</code>
+<code class="western">import java.awt.*;</code>
+<code class="western">import java.util.*;</code>
+<code class="western">import java.text.*;</code>
+
+<code class="western">public class MyClock extends Applet implements Runnable {</code>
+
+<code class="western">   </code><code class="western">int width, height;</code>
+<code class="western">   </code><code class="western">Thread t = null;</code>
+<code class="western">   </code><code class="western">boolean threadSuspended;</code>
+<code class="western">   </code><code class="western">int hours=0, minutes=0, seconds=0;</code>
+<code class="western">   </code><code class="western">String timeString = &quot;&quot;;</code>
+
+<code class="western">   </code><code class="western">public void init() {</code>
+<code class="western">      </code><code class="western">width = getSize().width;</code>
+<code class="western">      </code><code class="western">height = getSize().height;</code>
+<code class="western">      </code><code class="western">setBackground( Color.black );</code>
+<code class="western">   </code><code class="western">}</code>
+
+<code class="western">   </code><code class="western">public void start() {</code>
+<code class="western">      </code><code class="western">if ( t == null ) {</code>
+<code class="western">         </code><code class="western">t = new Thread( this );</code>
+<code class="western">         </code><code class="western">t.setPriority( Thread.MIN_PRIORITY );</code>
+<code class="western">         </code><code class="western">threadSuspended = false;</code>
+<code class="western">         </code><code class="western">t.start();</code>
+<code class="western">      </code><code class="western">}</code>
+<code class="western">      </code><code class="western">else {</code>
+<code class="western">         </code><code class="western">if ( threadSuspended ) {</code>
+<code class="western">            </code><code class="western">threadSuspended = false;</code>
+<code class="western">            </code><code class="western">synchronized( this ) {</code>
+<code class="western">               </code><code class="western">notify();</code>
+<code class="western">            </code><code class="western">}</code>
+<code class="western">         </code><code class="western">}</code>
+<code class="western">      </code><code class="western">}</code>
+<code class="western">   </code><code class="western">}</code>
+
+<code class="western">   </code><code class="western">public void stop() {</code>
+<code class="western">      </code><code class="western">threadSuspended = true;</code>
+<code class="western">   </code><code class="western">}</code>
+
+<code class="western">   </code><code class="western">public void run() {</code>
+<code class="western">      </code><code class="western">try {</code>
+<code class="western">         </code><code class="western">while (true) {</code>
+
+<code class="western">            </code><code class="western">Calendar cal = Calendar.getInstance();</code>
+<code class="western">            </code><code class="western">hours = cal.get( Calendar.HOUR_OF_DAY );</code>
+<code class="western">            </code><code class="western">if ( hours &gt; 12 ) hours -= 12;</code>
+<code class="western">            </code><code class="western">minutes = cal.get( Calendar.MINUTE );</code>
+<code class="western">            </code><code class="western">seconds = cal.get( Calendar.SECOND );</code>
+
+<code class="western">            </code><code class="western">SimpleDateFormat formatter</code>
+<code class="western">               </code><code class="western">= new SimpleDateFormat( &quot;hh:mm:ss&quot;, Locale.getDefault() );</code>
+<code class="western">            </code><code class="western">Date date = cal.getTime();</code>
+<code class="western">            </code><code class="western">timeString = formatter.format( date );</code>
+
+<code class="western">            </code><code class="western">// Now the thread checks to see if it should suspend itself</code>
+<code class="western">            </code><code class="western">if ( threadSuspended ) {</code>
+<code class="western">               </code><code class="western">synchronized( this ) {</code>
+<code class="western">                  </code><code class="western">while ( threadSuspended ) {</code>
+<code class="western">                     </code><code class="western">wait();</code>
+<code class="western">                  </code><code class="western">}</code>
+<code class="western">               </code><code class="western">}</code>
+<code class="western">            </code><code class="western">}</code>
+<code class="western">            </code><code class="western">repaint();</code>
+<code class="western">            </code><code class="western">t.sleep( 1000 );  // interval specified in milliseconds</code>
+<code class="western">         </code><code class="western">}</code>
+<code class="western">      </code><code class="western">}</code>
+<code class="western">      </code><code class="western">catch (Exception e) { }</code>
+<code class="western">   </code><code class="western">}</code>
+
+<code class="western">   </code><code class="western">void drawHand( double angle, int radius, Graphics g ) {</code>
+<code class="western">      </code><code class="western">angle -= 0.5 * Math.PI;</code>
+<code class="western">      </code><code class="western">int x = (int)( radius*Math.cos(angle) );</code>
+<code class="western">      </code><code class="western">int y = (int)( radius*Math.sin(angle) );</code>
+<code class="western">      </code><code class="western">g.drawLine( width/2, height/2, width/2 + x, height/2 + y );</code>
+<code class="western">   </code><code class="western">}</code>
+
+<code class="western">   </code><code class="western">void drawWedge( double angle, int radius, Graphics g ) {</code>
+<code class="western">      </code><code class="western">angle -= 0.5 * Math.PI;</code>
+<code class="western">      </code><code class="western">int x = (int)( radius*Math.cos(angle) );</code>
+<code class="western">      </code><code class="western">int y = (int)( radius*Math.sin(angle) );</code>
+<code class="western">      </code><code class="western">angle += 2*Math.PI/3;</code>
+<code class="western">      </code><code class="western">int x2 = (int)( 5*Math.cos(angle) );</code>
+<code class="western">      </code><code class="western">int y2 = (int)( 5*Math.sin(angle) );</code>
+<code class="western">      </code><code class="western">angle += 2*Math.PI/3;</code>
+<code class="western">      </code><code class="western">int x3 = (int)( 5*Math.cos(angle) );</code>
+<code class="western">      </code><code class="western">int y3 = (int)( 5*Math.sin(angle) );</code>
+<code class="western">      </code><code class="western">g.drawLine( width/2+x2, height/2+y2, width/2 + x, height/2 + y );</code>
+<code class="western">      </code><code class="western">g.drawLine( width/2+x3, height/2+y3, width/2 + x, height/2 + y );</code>
+<code class="western">      </code><code class="western">g.drawLine( width/2+x2, height/2+y2, width/2 + x3, height/2 + y3 );</code>
+<code class="western">   </code><code class="western">}</code>
+
+<code class="western">   </code><code class="western">public void paint( Graphics g ) {</code>
+<code class="western">      </code><code class="western">g.setColor( Color.gray );</code>
+<code class="western">      </code><code class="western">drawWedge( 2*Math.PI * hours / 12, width/5, g );</code>
+<code class="western">      </code><code class="western">drawWedge( 2*Math.PI * minutes / 60, width/3, g );</code>
+<code class="western">      </code><code class="western">drawHand( 2*Math.PI * seconds / 60, width/2, g );</code>
+<code class="western">      </code><code class="western">g.setColor( Color.white );</code>
+<code class="western">      </code><code class="western">g.drawString( timeString, 10, height-10 );</code>
+<code class="western">   </code><code class="western">}</code>
+<code class="western">}</code>
+
+
+
+<code class="western">myapplet.html</code>
+
+
+<code class="western"> </code><code class="western">name=&quot;code&quot; class=&quot;java&quot; &gt;</code>
+
+<code class="western">&lt;html&gt;</code>
+<code class="western">&lt;body&gt;</code>
+<code class="western">&lt;applet code=&quot;MyClock.class&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</code>
+<code class="western">&lt;/applet&gt;</code>
+<code class="western">&lt;/body&gt;</code>
+<code class="western">&lt;/html&gt;</code>
+</pre>
+<hr/>
+
+<pre class="western" style="margin-bottom: 0.5cm"><code class="western">Parameter in Applet</code>
+<code class="western">We can get any information from the HTML file as a parameter. For this purpose, Applet class provides a method named getParameter(). Syntax:</code>
+
+
+<code class="western">public String getParameter(String parameterName)</code>
+
+<code class="western">Example of using parameter in Applet:</code>
+<code class="western"> </code>
+<code class="western"> </code>
+
+<code class="western">import java.applet.Applet;</code>
+<code class="western">import java.awt.Graphics;</code>
+
+<code class="western">public class UseParam extends Applet{</code>
+
+<code class="western">public void paint(Graphics g){</code>
+<code class="western">String str=getParameter(&quot;msg&quot;);</code>
+<code class="western">g.drawString(str,50, 50);</code>
+<code class="western">}</code>
+
+<code class="western">}</code>
+
+
+
+<code class="western">myapplet.html</code>
+
+
+
+
+<code class="western">&lt;html&gt;</code>
+<code class="western">&lt;body&gt;</code>
+<code class="western">&lt;applet code=&quot;UseParam.class&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</code>
+<code class="western">&lt;param name=&quot;msg&quot; value=&quot;Welcome to applet&quot;&gt;</code>
+<code class="western">&lt;/applet&gt;</code>
+<code class="western">&lt;/body&gt;</code>
+<code class="western">&lt;/html&gt;</code>
+</pre>
+<hr/>
+
+<pre class="western" style="margin-top: 0.42cm; margin-bottom: 0.5cm; page-break-after: avoid"><code class="western">Applet Communication</code>
+<code class="western">java.applet.AppletContext class provides the facility of communication between applets. We provide the name of applet through the HTML file. It provides getApplet() method that returns the object of Applet. Syntax:</code>
+<code class="western"> </code>
+
+<code class="western">public Applet getApplet(String name){}</code>
+
+
+<code class="western">Example of Applet Communication</code>
+<code class="western">  </code>
+
+
+<code class="western">import java.applet.*;</code>
+<code class="western">import java.awt.*;</code>
+<code class="western">import java.awt.event.*;</code>
+<code class="western">public class ContextApplet extends Applet implements ActionListener{</code>
+<code class="western">Button b;</code>
+
+<code class="western">public void init(){</code>
+<code class="western">b=new Button(&quot;Click&quot;);</code>
+<code class="western">b.setBounds(50,50,60,50);</code>
+
+<code class="western">add(b);</code>
+<code class="western">b.addActionListener(this);</code>
+<code class="western">}</code>
+
+<code class="western">public void actionPerformed(ActionEvent e){</code>
+
+<code class="western">AppletContext ctx=getAppletContext();</code>
+<code class="western">Applet a=ctx.getApplet(&quot;app2&quot;);</code>
+<code class="western">a.setBackground(Color.yellow);</code>
+<code class="western">}</code>
+<code class="western">}</code>
+
+
+<code class="western">myapplet.html</code>
+<code class="western"> </code>
+
+<code class="western">&lt;html&gt;</code>
+<code class="western">&lt;body&gt;</code>
+<code class="western">&lt;applet code=&quot;ContextApplet.class&quot; width=&quot;150&quot; height=&quot;150&quot; name=&quot;app1&quot;&gt;</code>
+<code class="western">&lt;/applet&gt;</code>
+
+<code class="western">&lt;applet code=&quot;First.class&quot; width=&quot;150&quot; height=&quot;150&quot; name=&quot;app2&quot;&gt;</code>
+<code class="western">&lt;/applet&gt;</code>
+<code class="western">&lt;/body&gt;</code>
+<code class="western">&lt;/html&gt;</code>
+</pre>
+</body>
+</html>

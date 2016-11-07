@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Aum Amriteswaryai Namah -->
+
+<head>
+  <title>String and StringBuilder</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+
+<p><b>Please note: Content is from https://docs.oracle.com/javase/tutorial/java/data/strings.html</b></p>
+
+<p><b>Borrowed and shown due to lack of internet connectivity in the lab. Thank you Oracle!</b></p>
+
+
+<h1>1. Strings</h1>
+
+<p>Strings, which are widely used in Java programming, are a sequence of characters. In the Java programming language, strings are objects.</p>
+
+<p>The Java platform provides the String class to create and manipulate strings.</p>
+
+<h2>Creating Strings</h2>
+<p>The most direct way to create a string is to write:</p>
+<div class="codeblock"><pre>
+String greeting = "Hello world!";
+</pre></div>
+<p>In this case, &quot;Hello world!&quot; is a <i>string literal</i>&#151;a series of characters in your code that is enclosed in double quotes. Whenever it encounters a string literal in your code, the compiler creates a <code>String</code> object with its value&#151;in this case, <code>Hello world!</code>.</p>
+<p>As with any other object, you can create <code>String</code> objects by using the <code>new</code> keyword and a constructor. The <code>String</code> class has thirteen constructors that allow you to provide the initial value of the string using different sources, such as an array of characters:</p>
+<div class="codeblock"><pre>
+char[] helloArray = { 'h', 'e', 'l', 'l', 'o', '.' };
+String helloString = new String(helloArray);
+System.out.println(helloString);
+</pre></div>
+<p>The last line of this code snippet displays <code>hello</code>.</p>
+<div class="note"><hr /><strong>Note:</strong>&nbsp;The <code>String</code> class is immutable, so that once it is created a <code>String</code> object cannot be changed. The <code>String</code> class has a number of methods, some of which will be discussed below, that appear to modify strings. Since strings are immutable, what these methods really do is create and return a new string that contains the result of the operation.
+<hr /></div>
+<h2>String Length</h2>
+<p>Methods used to obtain information about an object are known as <em>accessor methods</em>. One accessor method that you can use with strings is the <code>length()</code> method, which returns the number of characters contained in the string object. After the following two lines of code have been executed, <code>len</code> equals 17:</p>
+<div class="codeblock"><pre>
+String palindrome = "Dot saw I was Tod";
+int len = palindrome.length();
+</pre></div>
+<p>A <i>palindrome</i> is a word or sentence that is symmetric&#151;it is spelled the same forward and backward, ignoring case and punctuation. Here is a short and inefficient program to reverse a palindrome string. It invokes the <code>String</code> method <code>charAt(i)</code>, which returns the i<sup>th</sup> character in the string, counting from 0.</p>
+<div class="codeblock"><pre>
+
+public class StringDemo {
+    public static void main(String[] args) {
+        String palindrome = &quot;Dot saw I was Tod&quot;;
+        int len = palindrome.length();
+        char[] tempCharArray = new char[len];
+        char[] charArray = new char[len];
+        
+        // put original string in an 
+        // array of chars
+        for (int i = 0; i &lt; len; i++) {
+            tempCharArray[i] = 
+                palindrome.charAt(i);
+        } 
+        
+        // reverse array of chars
+        for (int j = 0; j &lt; len; j++) {
+            charArray[j] =
+                tempCharArray[len - 1 - j];
+        }
+        
+        String reversePalindrome =
+            new String(charArray);
+        System.out.println(reversePalindrome);
+    }
+}
+</pre></div>
+<p>Running the program produces this output:</p>
+<div class="codeblock"><pre>
+doT saw I was toD
+</pre></div>
+<p>To accomplish the string reversal, the program had to convert the string to an array of characters (first <code>for</code> loop), reverse the array into a second array (second <code>for</code> loop), and then convert back to a string. The 
+<a class="APILink" target="_blank" href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"><code>String</code> </a> class includes a method, <code>getChars()</code>, to convert a string, or a portion of a string, into an array of characters so we could replace the first <code>for</code> loop in the program above with</p>
+<div class="codeblock"><pre>
+palindrome.getChars(0, len, tempCharArray, 0);
+</pre></div>
+<h2>Concatenating Strings</h2>
+<p>The <code>String</code> class includes a method for concatenating two strings:</p>
+<div class="codeblock"><pre>
+string1.concat(string2); 
+</pre></div>
+<p>This returns a new string that is string1 with string2 added to it at the end.</p>
+<p>You can also use the <code>concat()</code> method with string literals, as in:</p>
+<div class="codeblock"><pre>
+"My name is ".concat("Rumplestiltskin");
+</pre></div>
+<p>Strings are more commonly concatenated with the <code style="font-weight: bold">+</code> operator, as in</p>
+<div class="codeblock"><pre>
+"Hello," + " world" + "!"
+</pre></div>
+<p>which results in</p>
+<div class="codeblock"><pre>
+"Hello, world!"
+</pre></div>
+<p>The <code style="font-weight: bold">+</code> operator is widely used in <code>print</code> statements. For example:</p>
+<div class="codeblock"><pre>
+String string1 = "saw I was ";
+System.out.println("Dot " + string1 + "Tod");
+</pre></div>
+<p>which prints</p>
+<div class="codeblock"><pre>
+Dot saw I was Tod
+</pre></div>
+<p>Such a concatenation can be a mixture of any objects. For each object that is not a <code>String</code>, its <code>toString()</code> method is called to convert it to a <code>String</code>.</p>
+<div class="note"><hr /><strong>Note:</strong>&nbsp;The Java programming language does not permit literal strings to span lines in source files, so you must use the <code>+</code> concatenation operator at the end of each line in a multi-line string. For example:
+<div class="codeblock"><pre>
+String quote = 
+    "Now is the time for all good " +
+    "men to come to the aid of their country.";
+</pre></div>
+<p>Breaking strings between lines using the <code>+</code> concatenation operator is, once again, very common in <code>print</code> statements.</p>
+<hr /></div>
+<h2>Creating Format Strings</h2>
+<p>You have seen the use of the <code>printf()</code> and <code>format()</code> methods to print output with formatted numbers. The <code>String</code> class has an equivalent class method, <code>format()</code>, that returns a <code>String</code> object rather than a <code>PrintStream</code> object.</p>
+<p>Using <code>String&#39;s</code> static <code>format()</code> method allows you to create a formatted string that you can reuse, as opposed to a one-time print statement. For example, instead of</p>
+<div class="codeblock"><pre>
+System.out.printf("The value of the float " +
+                  "variable is %f, while " +
+                  "the value of the " + 
+                  "integer variable is %d, " +
+                  "and the string is %s", 
+                  floatVar, intVar, stringVar); 
+</pre></div>
+<p>you can write</p>
+<div class="codeblock"><pre>
+String fs;
+fs = String.format("The value of the float " +
+                   "variable is %f, while " +
+                   "the value of the " + 
+                   "integer variable is %d, " +
+                   " and the string is %s",
+                   floatVar, intVar, stringVar);
+System.out.println(fs);
+</pre></div>
+    
+<hr class="clearfloat"/>
+
+<h2>Converting Strings to Numbers</h2>
+<p>Frequently, a program ends up with numeric data in a string object&#151;a value entered by the user, for example.</p>
+<p>The <code>Number</code> subclasses that wrap primitive numeric types ( 
+<a class="APILink" target="_blank" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Byte.html"><code>Byte</code></a>, 
+<a class="APILink" target="_blank" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html"><code>Integer</code></a>, 
+<a class="APILink" target="_blank" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html"><code>Double</code></a>, 
+<a class="APILink" target="_blank" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Float.html"><code>Float</code></a>, 
+<a class="APILink" target="_blank" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html"><code>Long</code></a>, and 
+<a class="APILink" target="_blank" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Short.html"><code>Short</code></a>) each provide a class method named <code>valueOf</code> that converts a string to an object of that type. Here is an example, 
+<a class="SourceLink" target="_blank" href="examples/ValueOfDemo.java" onclick="showCode('../../displayCode.html', 'examples/ValueOfDemo.java'); return false;"><code>ValueOfDemo</code></a> , that gets two strings from the command line, converts them to numbers, and performs arithmetic operations on the values:</p>
+<div class="codeblock"><pre>
+
+public class ValueOfDemo {
+    public static void main(String[] args) {
+
+        // this program requires two 
+        // arguments on the command line 
+        if (args.length == 2) {
+            // convert strings to numbers
+            float a = (Float.valueOf(args[0])).floatValue(); 
+            float b = (Float.valueOf(args[1])).floatValue();
+
+            // do some arithmetic
+            System.out.println(&quot;a + b = &quot; +
+                               (a + b));
+            System.out.println(&quot;a - b = &quot; +
+                               (a - b));
+            System.out.println(&quot;a * b = &quot; +
+                               (a * b));
+            System.out.println(&quot;a / b = &quot; +
+                               (a / b));
+            System.out.println(&quot;a % b = &quot; +
+                               (a % b));
+        } else {
+            System.out.println(&quot;This program &quot; +
+                &quot;requires two command-line arguments.&quot;);
+        }
+    }
+}
+</pre></div>
+<p>The following is the output from the program when you use <code>4.5</code> and <code>87.2</code> for the command-line arguments:</p>
+<div class="codeblock"><pre>
+a + b = 91.7
+a - b = -82.7
+a * b = 392.4
+a / b = 0.0516055
+a % b = 4.5
+</pre></div>
+<div class="note"><hr /><strong>Note:</strong>&nbsp;Each of the <code>Number</code> subclasses that wrap primitive numeric types also provides a <code>parseXXXX()</code> method (for example, <code>parseFloat()</code>) that can be used to convert strings to primitive numbers. Since a primitive type is returned instead of an object, the <code>parseFloat()</code> method is more direct than the <code>valueOf()</code> method. For example, in the <code>ValueOfDemo</code> program, we could use:
+<div class="codeblock"><pre>
+float a = Float.parseFloat(args[0]);
+float b = Float.parseFloat(args[1]);
+</pre></div>
+<hr /></div>
+<h2>Converting Numbers to Strings</h2>
+<p>Sometimes you need to convert a number to a string because you need to operate on the value in its string form. There are several easy ways to convert a number to a string:</p>
+<div class="codeblock"><pre>
+int i;
+// Concatenate "i" with an empty string; conversion is handled for you.
+String s1 = "" + i;
+</pre></div>
+<p>or</p>
+<div class="codeblock"><pre>
+// The valueOf class method.
+String s2 = String.valueOf(i);
+</pre></div>
+<p>Each of the <code>Number</code> subclasses includes a class method, <code>toString()</code>, that will convert its primitive type to a string. For example:</p>
+<div class="codeblock"><pre>
+int i;
+double d;
+String s3 = Integer.toString(i); 
+String s4 = Double.toString(d); 
+</pre></div>
+<p>The 
+<a class="SourceLink" target="_blank" href="examples/ToStringDemo.java" onclick="showCode('../../displayCode.html', 'examples/ToStringDemo.java'); return false;"><code>ToStringDemo</code></a> example uses the <code>toString</code> method to convert a number to a string. The program then uses some string methods to compute the number of digits before and after the decimal point:</p>
+<div class="codeblock"><pre>
+
+public class ToStringDemo {
+    
+    public static void main(String[] args) {
+        double d = 858.48;
+        String s = Double.toString(d);
+        
+        int dot = s.indexOf('.');
+        
+        System.out.println(dot + &quot; digits &quot; +
+            &quot;before decimal point.&quot;);
+        System.out.println( (s.length() - dot - 1) +
+            &quot; digits after decimal point.&quot;);
+    }
+}
+</pre></div>
+<p>The output of this program is:</p>
+<div class="codeblock"><pre>
+3 digits before decimal point.
+2 digits after decimal point.
+</pre></div>
+
+<hr class="clearfloat"/>
+
+<h2>Getting Characters and Substrings by Index</h2>
+<p>You can get the character at a particular index within a string by invoking the <code>charAt()</code> accessor method. The index of the first character is 0, while the index of the last character is <code>length()-1</code>. For example, the following code gets the character at index 9 in a string:</p>
+<div class="codeblock"><pre>
+String anotherPalindrome = "Niagara. O roar again!"; 
+char aChar = anotherPalindrome.charAt(9);
+</pre></div>
+<p>Indices begin at 0, so the character at index 9 is &#39;O&#39;, as illustrated in the following figure: <!-- figure --></p>
+<center><img src="figures/objects-charAt.gif" width="569" height="78" align="bottom" alt="Use the charAt method to get a character at a particular index." /></center><p>If you want to get more than one consecutive character from a string, you can use the <code>substring</code> method. The <code>substring</code> method has two versions, as shown in the following table:</p>
+<table width="100%" border="1" cellpadding="4" cellspacing="3" summary="This table lists String methods">
+<caption style="font-weight: bold">The <code>substring</code> Methods in the <code>String</code> Class</caption>
+<tr>
+<th id="h1">Method</th>
+<th id="h2" width="60%">Description</th>
+</tr>
+<tr>
+<td headers="h1"><code>String substring(int beginIndex, int endIndex)</code></td>
+<td headers="h2">Returns a new string that is a substring of this string. The substring begins at the specified <code>beginIndex</code> and extends to the character at index <code>endIndex - 1</code>.</td>
+</tr>
+<tr>
+<td headers="h1"><code>String substring(int beginIndex)</code></td>
+<td headers="h2">Returns a new string that is a substring of this string. The integer argument specifies the index of the first character. Here, the returned substring extends to the end of the original string.</td>
+</tr>
+</table>
+<p>The following code gets from the Niagara palindrome the substring that extends from index 11 up to, but not including, index 15, which is the word &quot;roar&quot;:</p>
+<div class="codeblock"><pre>
+String anotherPalindrome = "Niagara. O roar again!"; 
+String roar = anotherPalindrome.substring(11, 15); 
+</pre></div>
+<!-- figure -->
+<center><img src="figures/objects-substring.gif" width="482" height="90" align="bottom" alt="Use the substring method to get part of a string." /></center><h2>Other Methods for Manipulating Strings</h2>
+<p>Here are several other <code>String</code> methods for manipulating strings:</p>
+<table width="100%" border="1" cellpadding="4" cellspacing="3" summary="This table lists other methods in the String class for manipulating strings">
+<caption style="font-weight: bold">Other Methods in the <code>String</code> Class for Manipulating Strings</caption>
+<tr>
+<th id="h101">Method</th>
+<th id="h102" width="50%">Description</th>
+</tr>
+<tr>
+<td headers="h101"><code>String[] split(String regex)</code><br />
+<code>String[] split(String regex, int limit)</code></td>
+<td headers="h102">Searches for a match as specified by the string argument (which contains a regular expression) and splits this string into an array of strings accordingly. The optional integer argument specifies the maximum size of the returned array. Regular expressions are covered in the lesson titled &quot;Regular Expressions.&quot;</td>
+</tr>
+<tr>
+<td headers="h101"><code>CharSequence subSequence(int beginIndex, int endIndex)</code></td>
+<td headers="h102">Returns a new character sequence constructed from <code>beginIndex</code> index up until <code>endIndex</code> - 1.</td>
+</tr>
+<tr>
+<td headers="h101"><code>String trim()</code></td>
+<td headers="h102">Returns a copy of this string with leading and trailing white space removed.</td>
+</tr>
+<tr>
+<td headers="h101"><code>String toLowerCase()<br />
+String toUpperCase()</code></td>
+<td headers="h102">Returns a copy of this string converted to lowercase or uppercase. If no conversions are necessary, these methods return the original string.</td>
+</tr>
+</table>
+<h2>Searching for Characters and Substrings in a String</h2>
+<p>Here are some other <code>String</code> methods for finding characters or substrings within a string. The <code>String</code> class provides accessor methods that return the position within the string of a specific character or substring: <code>indexOf()</code> and <code>lastIndexOf()</code>. The <code>indexOf()</code> methods search forward from the beginning of the string, and the <code>lastIndexOf()</code> methods search backward from the end of the string. If a character or substring is not found, <code>indexOf()</code> and <code>lastIndexOf()</code> return -1.</p>
+<p>The <code>String</code> class also provides a search method, <code>contains</code>, that returns true if the string contains a particular character sequence. Use this method when you only need to know that the string contains a character sequence, but the precise location isn&#39;t important.</p>
+<p>The following table describes the various string search methods.</p>
+<table width="100%" border="1" cellpadding="4" cellspacing="3" summary="This table lists the search methods in the String class">
+<caption style="font-weight: bold">The Search Methods in the <code>String</code> Class</caption>
+<tr>
+<th id="h201">Method</th>
+<th id="h202" width="50%">Description</th>
+</tr>
+<tr>
+<td headers="h201"><code>int indexOf(int ch)<br />
+int lastIndexOf(int ch)</code></td>
+<td headers="h202">Returns the index of the first (last) occurrence of the specified character.</td>
+</tr>
+<tr>
+<td headers="h201"><code>int indexOf(int ch, int fromIndex)<br />
+int lastIndexOf(int ch, int fromIndex)</code></td>
+<td headers="h202">Returns the index of the first (last) occurrence of the specified character, searching forward (backward) from the specified index.</td>
+</tr>
+<tr>
+<td headers="h201"><code>int indexOf(String str)<br />
+int lastIndexOf(String str)</code></td>
+<td headers="h202">Returns the index of the first (last) occurrence of the specified substring.</td>
+</tr>
+<tr>
+<td headers="h201"><code>int indexOf(String str, int fromIndex)<br />
+int lastIndexOf(String str, int fromIndex)</code></td>
+<td headers="h202">Returns the index of the first (last) occurrence of the specified substring, searching forward (backward) from the specified index.</td>
+</tr>
+<tr>
+<td headers="h201"><code>boolean contains(CharSequence s)</code></td>
+<td headers="h202">Returns true if the string contains the specified character sequence.</td>
+</tr>
+</table>
+<div class="note"><hr /><strong>Note:</strong>&nbsp;<code>CharSequence</code> is an interface that is implemented by the <code>String</code> class. Therefore, you can use a string as an argument for the <code>contains()</code> method.
+<hr /></div>
+<h2>Replacing Characters and Substrings into a String</h2>
+<p>The <code>String</code> class has very few methods for inserting characters or substrings into a string. In general, they are not needed: You can create a new string by concatenation of substrings you have <i>removed</i> from a string with the substring that you want to insert.</p>
+<p>The <code>String</code> class does have four methods for <i>replacing</i> found characters or substrings, however. They are:</p>
+<table width="100%" border="1" cellpadding="4" cellspacing="3" summary="This table lists String methods for manipulating strings">
+<caption style="font-weight: bold">Methods in the <code>String</code> Class for Manipulating Strings</caption>
+<tr>
+<th id="h301">Method</th>
+<th id="h302" width="50%">Description</th>
+</tr>
+<tr>
+<td headers="h301"><code>String replace(char oldChar, char newChar)</code></td>
+<td headers="h302">Returns a new string resulting from replacing all occurrences of oldChar in this string with newChar.</td>
+</tr>
+<tr>
+<td headers="h301"><code>String replace(CharSequence target, CharSequence replacement)</code></td>
+<td headers="h302">Replaces each substring of this string that matches the literal target sequence with the specified literal replacement sequence.</td>
+</tr>
+<tr>
+<td headers="h301"><code>String replaceAll(String regex, String replacement)</code></td>
+<td headers="h302">Replaces each substring of this string that matches the given regular expression with the given replacement.</td>
+</tr>
+<tr>
+<td headers="h301"><code>String replaceFirst(String regex, String replacement)</code></td>
+<td headers="h302">Replaces the first substring of this string that matches the given regular expression with the given replacement.</td>
+</tr>
+</table>
+<h2>An Example</h2>
+<p>The following class, 
+<a class="SourceLink" target="_blank" href="examples/Filename.java" onclick="showCode('../../displayCode.html', 'examples/Filename.java'); return false;"><code>Filename</code></a>, illustrates the use of <code>lastIndexOf()</code> and <code>substring()</code> to isolate different parts of a file name.</p>
+<div class="note"><hr /><strong>Note:</strong>&nbsp;The methods in the following <code>Filename</code> class don&#39;t do any error checking and assume that their argument contains a full directory path and a filename with an extension. If these methods were production code, they would verify that their arguments were properly constructed.
+<hr /></div>
+<div class="codeblock"><pre>
+
+public class Filename {
+    private String fullPath;
+    private char pathSeparator, 
+                 extensionSeparator;
+
+    public Filename(String str, char sep, char ext) {
+        fullPath = str;
+        pathSeparator = sep;
+        extensionSeparator = ext;
+    }
+
+    public String extension() {
+        int dot = fullPath.lastIndexOf(extensionSeparator);
+        return fullPath.substring(dot + 1);
+    }
+
+    // gets filename without extension
+    public String filename() {
+        int dot = fullPath.lastIndexOf(extensionSeparator);
+        int sep = fullPath.lastIndexOf(pathSeparator);
+        return fullPath.substring(sep + 1, dot);
+    }
+
+    public String path() {
+        int sep = fullPath.lastIndexOf(pathSeparator);
+        return fullPath.substring(0, sep);
+    }
+}
+</pre></div>
+<p>Here is a program, 
+<a class="SourceLink" target="_blank" href="examples/FilenameDemo.java" onclick="showCode('../../displayCode.html', 'examples/FilenameDemo.java'); return false;"><code>FilenameDemo</code></a>, that constructs a <code>Filename</code> object and calls all of its methods:</p>
+<div class="codeblock"><pre>
+
+public class FilenameDemo {
+    public static void main(String[] args) {
+        final String FPATH = &quot;/home/user/index.html&quot;;
+        Filename myHomePage = new Filename(FPATH, '/', '.');
+        System.out.println(&quot;Extension = &quot; + myHomePage.extension());
+        System.out.println(&quot;Filename = &quot; + myHomePage.filename());
+        System.out.println(&quot;Path = &quot; + myHomePage.path());
+    }
+}
+</pre></div>
+<p>And here&#39;s the output from the program:</p>
+<div class="codeblock"><pre>
+Extension = html
+Filename = index
+Path = /home/user
+</pre></div>
+<p>As shown in the following figure, our <code>extension</code> method uses <code>lastIndexOf</code> to locate the last occurrence of the period (.) in the file name. Then <code>substring</code> uses the return value of <code>lastIndexOf</code> to extract the file name extension &#151; that is, the substring from the period to the end of the string. This code assumes that the file name has a period in it; if the file name does not have a period, <code>lastIndexOf</code> returns -1, and the substring method throws a <code>StringIndexOutOfBoundsException</code>.</p>
+<center><img src="figures/objects-lastIndexOf.gif" width="325" height="127" align="bottom" alt="The use of lastIndexOf and substring in the extension method in the Filename class." /></center><p>Also, notice that the <code>extension</code> method uses <code>dot + 1</code> as the argument to <code>substring</code>. If the period character (.) is the last character of the string, <code>dot + 1</code> is equal to the length of the string, which is one larger than the largest index into the string (because indices start at 0). This is a legal argument to <code>substring</code> because that method accepts an index equal to, but not greater than, the length of the string and interprets it to mean &quot;the end of the string.&quot;</p>
+    
+<hr class="clearfloat"/>
+
+<!-- Comparing Strings and Portions of Strings -->
+<p>The <code>String</code> class has a number of methods for comparing strings and portions of strings. The following table lists these methods.</p>
+<table width="100%" border="1" cellpadding="4" cellspacing="3" summary="This table lists methods for comparing strings">
+<caption style="font-weight: bold">Methods for Comparing Strings</caption>
+<tr>
+<th id="h1">Method</th>
+<th id="h2" width="50%">Description</th>
+</tr>
+<tr>
+<td headers="h1"><code>boolean endsWith(String suffix)<br />
+boolean startsWith(String prefix)</code></td>
+<td headers="h2">Returns <code>true</code> if this string ends with or begins with the substring specified as an argument to the method.</td>
+</tr>
+<tr>
+<td headers="h1"><code>boolean startsWith(String prefix, int offset)</code></td>
+<td headers="h2">Considers the string beginning at the index <code>offset</code>, and returns <code>true</code> if it begins with the substring specified as an argument.</td>
+</tr>
+<tr>
+<td headers="h1"><code>int compareTo(String anotherString)</code></td>
+<td headers="h2">Compares two strings lexicographically. Returns an integer indicating whether this string is greater than (result is &gt; 0), equal to (result is = 0), or less than (result is &lt; 0) the argument.</td>
+</tr>
+<tr>
+<td headers="h1"><code>int compareToIgnoreCase(String str)</code></td>
+<td headers="h2">Compares two strings lexicographically, ignoring differences in case. Returns an integer indicating whether this string is greater than (result is &gt; 0), equal to (result is = 0), or less than (result is &lt; 0) the argument.</td>
+</tr>
+<tr>
+<td headers="h1"><code>boolean equals(Object anObject)</code></td>
+<td headers="h2">Returns <code>true</code> if and only if the argument is a <code>String</code> object that represents the same sequence of characters as this object.</td>
+</tr>
+<tr>
+<td headers="h1"><code>boolean equalsIgnoreCase(String anotherString)</code></td>
+<td headers="h2">Returns <code>true</code> if and only if the argument is a <code>String</code> object that represents the same sequence of characters as this object, ignoring differences in case.</td>
+</tr>
+<tr>
+<td headers="h1"><code>boolean regionMatches(int toffset, String other, int ooffset, int len)</code></td>
+<td headers="h2">Tests whether the specified region of this string matches the specified region of the String argument.
+<p>Region is of length <code>len</code> and begins at the index <code>toffset</code> for this string and <code>ooffset</code> for the other string.</p>
+</td>
+</tr>
+<tr>
+<td headers="h1"><code>boolean regionMatches(boolean ignoreCase, int toffset, String other, int ooffset, int len)</code></td>
+<td headers="h2">Tests whether the specified region of this string matches the specified region of the String argument.
+<p>Region is of length <code>len</code> and begins at the index <code>toffset</code> for this string and <code>ooffset</code> for the other string.</p>
+<p>The boolean argument indicates whether case should be ignored; if true, case is ignored when comparing characters.</p>
+</td>
+</tr>
+<tr>
+<td headers="h1"><code>boolean matches(String regex)</code></td>
+<td headers="h2">Tests whether this string matches the specified regular expression. Regular expressions are discussed in the lesson titled &quot;Regular Expressions.&quot;</td>
+</tr>
+</table>
+<p>The following program, <code>RegionMatchesDemo</code>, uses the <code>regionMatches</code> method to search for a string within another string:</p>
+<div class="codeblock"><pre>
+
+public class RegionMatchesDemo {
+    public static void main(String[] args) {
+        String searchMe = &quot;Green Eggs and Ham&quot;;
+        String findMe = &quot;Eggs&quot;;
+        int searchMeLength = searchMe.length();
+        int findMeLength = findMe.length();
+        boolean foundIt = false;
+        for (int i = 0; 
+             i &lt;= (searchMeLength - findMeLength);
+             i++) {
+           if (searchMe.regionMatches(i, findMe, 0, findMeLength)) {
+              foundIt = true;
+              System.out.println(searchMe.substring(i, i + findMeLength));
+              break;
+           }
+        }
+        if (!foundIt)
+            System.out.println(&quot;No match found.&quot;);
+    }
+}
+</pre></div>
+<p>The output from this program is <code>Eggs</code>.</p>
+<p>The program steps through the string referred to by <code>searchMe</code> one character at a time. For each character, the program calls the regionMatches method to determine whether the substring beginning with the current character matches the string the program is looking for.</p>
+
+<hr class="clearfloat"/>
+<hr class="clearfloat"/>
+
+<!-- String Builder -->
+<h1>2. String Builder</h1>
+<p>
+<a class="APILink" target="_blank" href="https://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html"><code>StringBuilder</code> </a> objects are like 
+<a class="APILink" target="_blank" href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"><code>String</code> </a> objects, except that they can be modified. Internally, these objects are treated like variable-length arrays that contain a sequence of characters. At any point, the length and content of the sequence can be changed through method invocations.</p>
+<p>Strings should always be used unless string builders offer an advantage in terms of simpler code (see the sample program at the end of this section) or better performance. For example, if you need to concatenate a large number of strings, appending to a <code>StringBuilder</code> object is more efficient.</p>
+<h2>Length and Capacity</h2>
+<p>The <code>StringBuilder</code> class, like the <code>String</code> class, has a <code>length()</code> method that returns the length of the character sequence in the builder.</p>
+<p>Unlike strings, every string builder also has a <i>capacity</i>, the number of character spaces that have been allocated. The capacity, which is returned by the <code>capacity()</code> method, is always greater than or equal to the length (usually greater than) and will automatically expand as necessary to accommodate additions to the string builder.</p>
+<table width="100%" border="1" cellpadding="4" cellspacing="3" summary="This table lists the constructors for the StringBuilder class">
+<caption style="font-weight: bold"><code>StringBuilder</code> Constructors</caption>
+<tr>
+<th id="h1">Constructor</th>
+<th id="h2" width="50%">Description</th>
+</tr>
+<tr>
+<td headers="h1"><code>StringBuilder()</code></td>
+<td headers="h2">Creates an empty string builder with a capacity of 16 (16 empty elements).</td>
+</tr>
+<tr>
+<td headers="h1"><code>StringBuilder(CharSequence cs)</code></td>
+<td headers="h2">Constructs a string builder containing the same characters as the specified <code>CharSequence</code>, plus an extra 16 empty elements trailing the <code>CharSequence</code>.</td>
+</tr>
+<tr>
+<td headers="h1"><code>StringBuilder(int initCapacity)</code></td>
+<td headers="h2">Creates an empty string builder with the specified initial capacity.</td>
+</tr>
+<tr>
+<td headers="h1"><code>StringBuilder(String s)</code></td>
+<td headers="h2">Creates a string builder whose value is initialized by the specified string, plus an extra 16 empty elements trailing the string.</td>
+</tr>
+</table>
+<p>For example, the following code</p>
+<div class="codeblock"><pre>
+// creates empty builder, capacity 16
+StringBuilder sb = new StringBuilder();
+// adds 9 character string at beginning
+sb.append("Greetings");
+</pre></div>
+<p>will produce a string builder with a length of 9 and a capacity of 16: </p>
+<center><img src="figures/objects-stringBuffer.gif" width="461" height="90" align="bottom" alt="A string builder's length is the number of characters it contains; a string builder's capacity is the number of character spaces that have been allocated." /></center><p>The <code>StringBuilder</code> class has some methods related to length and capacity that the <code>String</code> class does not have:</p>
+<table width="100%" border="1" cellpadding="4" cellspacing="3" summary="This table lists length and capacity methods">
+<caption style="font-weight: bold">Length and Capacity Methods</caption>
+<tr>
+<th id="h101">Method</th>
+<th id="h102" width="50%">Description</th>
+</tr>
+<tr>
+<td headers="h101"><code>void setLength(int newLength)</code></td>
+<td headers="h102">Sets the length of the character sequence. If <code>newLength</code> is less than <code>length()</code>, the last characters in the character sequence are truncated. If <code>newLength</code> is greater than <code>length()</code>, null characters are added at the end of the character sequence.</td>
+</tr>
+<tr>
+<td headers="h101"><code>void ensureCapacity(int minCapacity)</code></td>
+<td headers="h102">Ensures that the capacity is at least equal to the specified minimum.</td>
+</tr>
+</table>
+<p>A number of operations (for example, <code>append()</code>, <code>insert()</code>, or <code>setLength()</code>) can increase the length of the character sequence in the string builder so that the resultant <code>length()</code> would be greater than the current <code>capacity()</code>. When this happens, the capacity is automatically increased.</p>
+<h2>StringBuilder Operations</h2>
+<p>The principal operations on a <code>StringBuilder</code> that are not available in <code>String</code> are the <code>append()</code> and <code>insert()</code> methods, which are overloaded so as to accept data of any type. Each converts its argument to a string and then appends or inserts the characters of that string to the character sequence in the string builder. The append method always adds these characters at the end of the existing character sequence, while the insert method adds the characters at a specified point.</p>
+<p>Here are a number of the methods of the <code>StringBuilder</code> class.</p>
+<table width="100%" border="1" cellpadding="4" cellspacing="3" summary="This table lists miscellaneous StringBuilder methods">
+<caption style="font-weight: bold">Various <code>StringBuilder</code> Methods</caption>
+<tr>
+<th id="h201">Method</th>
+<th id="h202" width="50%">Description</th>
+</tr>
+<tr>
+<td headers="h201"><code>StringBuilder append(boolean b)<br />
+StringBuilder append(char c)<br />
+StringBuilder append(char[] str)<br />
+StringBuilder append(char[] str, int offset, int len)<br />
+StringBuilder append(double d)<br />
+StringBuilder append(float f)<br />
+StringBuilder append(int i)<br />
+StringBuilder append(long lng)<br />
+StringBuilder append(Object obj)<br />
+StringBuilder append(String s)</code></td>
+<td headers="h202">Appends the argument to this string builder. The data is converted to a string before the append operation takes place.</td>
+</tr>
+<tr>
+<td headers="h201"><code>StringBuilder delete(int start, int end)<br />
+StringBuilder deleteCharAt(int index)</code></td>
+<td headers="h202">The first method deletes the subsequence from start to end-1 (inclusive) in the <code>StringBuilder</code>&#39;s char sequence. The second method deletes the character located at <code>index</code>.</td>
+</tr>
+<tr>
+<td headers="h201"><code>StringBuilder insert(int offset, boolean b)<br />
+StringBuilder insert(int offset, char c)<br />
+StringBuilder insert(int offset, char[] str)<br />
+StringBuilder insert(int index, char[] str, int offset, int len)<br />
+StringBuilder insert(int offset, double d)<br />
+StringBuilder insert(int offset, float f)<br />
+StringBuilder insert(int offset, int i)<br />
+StringBuilder insert(int offset, long lng)<br />
+StringBuilder insert(int offset, Object obj)<br />
+StringBuilder insert(int offset, String s)</code></td>
+<td headers="h202">Inserts the second argument into the string builder. The first integer argument indicates the index before which the data is to be inserted. The data is converted to a string before the insert operation takes place.</td>
+</tr>
+<tr>
+<td headers="h201"><code>StringBuilder replace(int start, int end, String s)<br />
+void setCharAt(int index, char c)</code></td>
+<td headers="h202">Replaces the specified character(s) in this string builder.</td>
+</tr>
+<tr>
+<td headers="h201"><code>StringBuilder reverse()</code></td>
+<td headers="h202">Reverses the sequence of characters in this string builder.</td>
+</tr>
+<tr>
+<td headers="h201"><code>String toString()</code></td>
+<td headers="h202">Returns a string that contains the character sequence in the builder.</td>
+</tr>
+</table>
+<div class="note"><hr /><strong>Note:</strong>&nbsp;You can use any <code>String</code> method on a <code>StringBuilder</code> object by first converting the string builder to a string with the <code>toString()</code> method of the <code>StringBuilder</code> class. Then convert the string back into a string builder using the <code>StringBuilder(String str)</code> constructor.
+<hr /></div>
+<h2>An Example</h2>
+<p>The <code>StringDemo</code> program that was listed in the section titled &quot;Strings&quot; is an example of a program that would be more efficient if a <code>StringBuilder</code> were used instead of a <code>String</code>.</p>
+<p><code>StringDemo</code> reversed a palindrome. Here, once again, is its listing:</p>
+<div class="codeblock"><pre>
+
+public class StringDemo {
+    public static void main(String[] args) {
+        String palindrome = &quot;Dot saw I was Tod&quot;;
+        int len = palindrome.length();
+        char[] tempCharArray = new char[len];
+        char[] charArray = new char[len];
+        
+        // put original string in an 
+        // array of chars
+        for (int i = 0; i &lt; len; i++) {
+            tempCharArray[i] = 
+                palindrome.charAt(i);
+        } 
+        
+        // reverse array of chars
+        for (int j = 0; j &lt; len; j++) {
+            charArray[j] =
+                tempCharArray[len - 1 - j];
+        }
+        
+        String reversePalindrome =
+            new String(charArray);
+        System.out.println(reversePalindrome);
+    }
+}
+</pre></div>
+<p>Running the program produces this output:</p>
+<div class="codeblock"><pre>
+doT saw I was toD
+</pre></div>
+<p>To accomplish the string reversal, the program converts the string to an array of characters (first <code>for</code> loop), reverses the array into a second array (second <code>for</code> loop), and then converts back to a string.</p>
+<p>If you convert the <code>palindrome</code> string to a string builder, you can use the <code>reverse()</code> method in the <code>StringBuilder</code> class. It makes the code simpler and easier to read:</p>
+<div class="codeblock"><pre>
+
+public class StringBuilderDemo {
+    public static void main(String[] args) {
+        String palindrome = &quot;Dot saw I was Tod&quot;;
+         
+        StringBuilder sb = new StringBuilder(palindrome);
+        
+        sb.reverse();  // reverse it
+        
+        System.out.println(sb);
+    }
+}
+</pre></div>
+<p>Running this program produces the same output:</p>
+<div class="codeblock"><pre>
+doT saw I was toD
+</pre></div>
+<p>Note that <code>println()</code> prints a string builder, as in:</p>
+<div class="codeblock"><pre>
+System.out.println(sb);
+</pre></div>
+<p>because <code>sb.toString()</code> is called implicitly, as it is with any other object in a <code>println()</code> invocation.</p>
+<div class="note"><hr /><strong>Note:</strong>&nbsp;There is also a <code>StringBuffer</code> class that is <i>exactly</i> the same as the <code>StringBuilder</code> class, except that it is thread-safe by virtue of having its methods synchronized. Threads will be discussed in the
+lesson 
+on concurrency.
+<hr /></div>
+
+<hr class="clearfloat"/>
+
+
+</body>
