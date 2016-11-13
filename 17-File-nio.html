@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Aum Amriteswaryai Namah -->
+
+
+
+<head>
+  
+<title>File from java.nio</title>
+  
+<meta charset="UTF-8">
+
+</head>
+
+
+
+<body>
+
+<h2>File from java.nio</h2>
+
+
+<b>From https://www.tutorialspoint.com/java/java_file_class.htm</b>
+
+<b>Replicated here due to non-availability of Internet in lab.</b>
+
+<p>Java File class represents the files and directory pathnames in an abstract manner. This class is used for creation of files and directories, file searching, file deletion, etc.</p>
+<p>The File object represents the actual file/directory on the disk. Following is the list of constructors to create a File object.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>File(File parent, String child)</b></p>
+<p>This constructor creates a new File instance from a parent abstract pathname and a child pathname string.</p> 
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>File(String pathname)</b></p>
+<p>This constructor creates a new File instance by converting the given pathname string into an abstract pathname.</p> 
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>File(String parent, String child)</b></p>
+<p>This constructor creates a new File instance from a parent pathname string and a child pathname string.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>File(URI uri)</b></p>
+<p>This constructor creates a new File instance by converting the given file: URI into an abstract pathname.</p>
+</td>
+</tr>
+</table>
+<p>Once you have <i>File</i> object in hand, then there is a list of helper methods which can be used to manipulate the files.</p>
+<table class="table table-bordered">
+<tr>
+<th>Sr.No.</th>
+<th style="text-align:center;">Method &amp; Description</th>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">1</td>
+<td><p><b>public String getName()</b></p>
+<p>Returns the name of the file or directory denoted by this abstract pathname.</p> 
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">2</td>
+<td><p><b>public String getParent()</b></p>
+<p>Returns the pathname string of this abstract pathname's parent, or null if this pathname does not name a parent directory.</p> 
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">3</td>
+<td><p><b>public File getParentFile()</b></p>
+<p>Returns the abstract pathname of this abstract pathname's parent, or null if this pathname does not name a parent directory.</p> 
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">4</td>
+<td><p><b>public String getPath()</b></p>
+<p>Converts this abstract pathname into a pathname string.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">5</td>
+<td><p><b>public boolean isAbsolute()</b></p>
+<p>Tests whether this abstract pathname is absolute. Returns true if this abstract pathname is absolute, false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">6</td>
+<td><p><b>public String getAbsolutePath()</b></p>
+<p>Returns the absolute pathname string of this abstract pathname.</p> 
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">7</td>
+<td><p><b>public boolean canRead()</b></p>
+<p>Tests whether the application can read the file denoted by this abstract pathname. Returns true if and only if the file specified by this abstract pathname exists and can be read by the application; false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">8</td>
+<td><p><b>public boolean canWrite()</b></p>
+<p>Tests whether the application can modify to the file denoted by this abstract pathname. Returns true if and only if the file system actually contains a file denoted by this abstract pathname and the application is allowed to write to the file; false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">9</td>
+<td><p><b>public boolean exists()</b></p>
+<p>Tests whether the file or directory denoted by this abstract pathname exists. Returns true if and only if the file or directory denoted by this abstract pathname exists; false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">10</td>
+<td><p><b>public boolean isDirectory()</b></p>
+<p>Tests whether the file denoted by this abstract pathname is a directory. Returns true if and only if the file denoted by this abstract pathname exists and is a directory; false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">11</td>
+<td><p><b>public boolean isFile()</b></p>
+<p>Tests whether the file denoted by this abstract pathname is a normal file. A file is normal if it is not a directory and, in addition, satisfies other system-dependent criteria. Any non-directory file created by a Java application is guaranteed to be a normal file. Returns true if and only if the file denoted by this abstract pathname exists and is a normal file; false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">12</td>
+<td><p><b>public long lastModified()</b></p>
+<p>Returns the time that the file denoted by this abstract pathname was last modified. Returns a long value representing the time the file was last modified, measured in milliseconds since the epoch (00:00:00 GMT, January 1, 1970), or 0L if the file does not exist or if an I/O error occurs.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">13</td>
+<td><p><b>public long length()</b></p>
+<p>Returns the length of the file denoted by this abstract pathname. The return value is unspecified if this pathname denotes a directory.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">14</td>
+<td><p><b>public boolean createNewFile() throws IOException</b></p>
+<p>Atomically creates a new, empty file named by this abstract pathname if and only if a file with this name does not yet exist. Returns true if the named file does not exist and was successfully created; false if the named file already exists.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">15</td>
+<td><p><b>public boolean delete()</b></p>
+<p>Deletes the file or directory denoted by this abstract pathname. If this pathname denotes a directory, then the directory must be empty in order to be deleted.  Returns true if and only if the file or directory is successfully deleted; false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">16</td>
+<td><p><b>public void deleteOnExit()</b></p>
+<p>Requests that the file or directory denoted by this abstract pathname be deleted when the virtual machine terminates.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">17</td>
+<td><p><b>public String[] list()</b></p>
+<p>Returns an array of strings naming the files and directories in the directory denoted by this abstract pathname.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">18</td>
+<td><p><b>public String[] list(FilenameFilter filter)</b></p>
+<p>Returns an array of strings naming the files and directories in the directory denoted by this abstract pathname that satisfy the specified filter.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">20</td>
+<td><p><b>public File[] listFiles()</b></p>
+<p>Returns an array of abstract pathnames denoting the files in the directory denoted by this abstract pathname.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">21</td>
+<td><p><b>public File[] listFiles(FileFilter filter)</b></p>
+<p>Returns an array of abstract pathnames denoting the files and directories in the directory denoted by this abstract pathname that satisfy the specified filter.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">22</td>
+<td><p><b>public boolean mkdir()</b></p>
+<p>Creates the directory named by this abstract pathname. Returns true if and only if the directory was created; false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">23</td>
+<td><p><b>public boolean mkdirs()</b></p>
+<p>Creates the directory named by this abstract pathname, including any necessary but nonexistent parent directories.  Returns true if and only if the directory was created, along with all necessary parent directories; false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">24</td>
+<td><p><b>public boolean renameTo(File dest)</b></p>
+<p>Renames the file denoted by this abstract pathname. Returns true if and only if the renaming succeeded; false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">25</td>
+<td><p><b>public boolean setLastModified(long time)</b></p>
+<p>Sets the last-modified time of the file or directory named by this abstract pathname. Returns true if and only if the operation succeeded; false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">26</td>
+<td><p><b>public boolean setReadOnly()</b></p>
+<p>Marks the file or directory named by this abstract pathname so that only read operations are allowed. Returns true if and only if the operation succeeded; false otherwise.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">27</td>
+<td><p><b>public static File createTempFile(String prefix, String suffix, File directory) throws IOException</b></p>
+<p>Creates a new empty file in the specified directory, using the given prefix and suffix strings to generate its name. Returns an abstract pathname denoting a newly-created empty file.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">28</td>
+<td><p><b>public static File createTempFile(String prefix, String suffix) throws IOException</b></p>
+<p>Creates an empty file in the default temporary-file directory, using the given prefix and suffix to generate its name. Invoking this method is equivalent to invoking createTempFile(prefix, suffix, null). Returns abstract pathname denoting a newly-created empty file.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">29</td>
+<td><p><b>public int compareTo(File pathname)</b></p>
+<p>Compares two abstract pathnames lexicographically. Returns zero if the argument is equal to this abstract pathname, a value less than zero if this abstract pathname is lexicographically less than the argument, or a value greater than zero if this abstract pathname is lexicographically greater than the argument.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">30</td>
+<td><p><b>public int compareTo(Object o)</b></p>
+<p>Compares this abstract pathname to another object. Returns zero if the argument is equal to this abstract pathname, a value less than zero if this abstract pathname is lexicographically less than the argument, or a value greater than zero if this abstract pathname is lexicographically greater than the argument.</p>
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">31</td>
+<td><p><b>public boolean equals(Object obj)</b></p>
+<p>Tests this abstract pathname for equality with the given object. Returns true if and only if the argument is not null and is an abstract pathname that denotes the same file or directory as this abstract pathname.</p> 
+</td>
+</tr>
+<tr>
+<td style="text-align:center; vertical-align:middle;">32</td>
+<td><p><b>public String toString()</b></p>
+<p>Returns the pathname string of this abstract pathname. This is just the string returned by the getPath() method.</p>
+</td>
+</tr>
+</table>
+<h2>Example</h2>
+<p>Following is an example to demonstrate File object &minus;</p>
+<pre class="prettyprint notranslate">
+package com.tutorialspoint;
+import java.io.File;
+
+public class FileDemo {
+   
+   public static void main(String[] args) {
+      File f = null;
+      String[] strs = {"test1.txt", "test2.txt"};
+      try {
+         // for each string in string array 
+         for(String s:strs ) {
+            // create new file
+            f = new File(s);
+            
+            // true if the file is executable
+            boolean bool = f.canExecute();
+            
+            // find the absolute path
+            String a = f.getAbsolutePath(); 
+            
+            // prints absolute path
+            System.out.print(a);
+            
+            // prints
+            System.out.println(" is executable: "+ bool);
+         } 
+      }catch(Exception e) {
+         // if any I/O error occurs
+         e.printStackTrace();
+      }
+   }
+}
+</pre>
+<p>Consider there is an executable file test1.txt and another file test2.txt is non executable in the current directory. Let us compile and run the above program, This will produce the following result &minus;</p><h2>Output</h2>
+<pre class="result notranslate">
+<i>Path of the file</i>/test1.txt is executable: false
+<i>Path of the file</i>/test2.txt is executable: false
+</pre>
+<hr />
+
+<b>From http://tutorials.jenkov.com/java-io/file.html</b>
+
+<p>
+    The <code>File</code> class in the Java IO API gives you access to the underlying file system. Using the
+    <code>File</code> class you can:
+</p>
+
+<ul>
+    <li><a href="#exists">Check if a file or directory exists.</a></li>
+    <li><a href="#makeDir">Create a directory if it does not exist.</a></li>
+    <li><a href="#length">Read the length of a file.</a></li>
+    <li><a href="#rename">Rename or move a file.</a></li>
+    <li><a href="#delete">Delete a file.</a></li>
+    <li><a href="#isDirectory">Check if path is file or directory.</a></li>
+    <li><a href="#listDirectory">Read list of files in a directory.</a></li>
+</ul>
+
+<p>
+    This text will tell you more about how.
+</p>
+
+<p>
+    Note: The <code>File</code> only gives you access to the file and file system meta data.
+    If you need to read or write the content of files, you should do so using either <a href="fileinputstream.html">FileInputStream</a>,
+    <a href="fileoutputstream.html">FileOutputStream</a> or <a href="randomaccessfile.html">RandomAccessFile</a>.
+</p>
+
+<p>
+    Note: If you are using Java NIO you will have to use the <a href="/java-nio/file-channel.html">java.nio.FileChannel</a>
+    class instead (you can use both, but in case you want a pure Java NIO solution).
+</p>
+
+
+<a name="instantiating-a-java-io-file"></a>
+<h2>Instantiating a java.io.File</h2>
+<p>
+    Before you can do anything with the file system or <code>File</code> class, you must obtain a <code>File</code>
+    instance. Here is how that is done:
+</p>
+
+<pre class="codeBox">
+File file = new File("c:\\data\\input-file.txt");
+</pre>
+
+<p>
+    Simple, right? The <code>File</code> class also has a few other constructors you can use to instantiate
+    <code>File</code> instances in different ways.
+</p>
+
+
+<a name="exists"></a>
+<h2>Check if File Exists</h2>
+<p>
+    Once you have instantiated a <code>File</code> object you can check if the corresponding file actually
+    exists already. The <code>File</code> class constructor will not fail if the file does not already exists.
+    You might want to create it now, right?
+</p>
+
+<p>
+    To check if the file exists, call the <code>exists()</code> method. Here is a simple example:
+</p>
+
+<pre class="codeBox">
+File file = new File("c:\\data\\input-file.txt");
+
+boolean fileExists = file.exists();
+</pre>
+
+
+
+
+<a name="makeDir"></a>
+<h2>Create a Directory if it Does Not Exist</h2>
+
+<p>
+    You can use the <code>File</code> class to create directories if they don't already exists. The <code>File</code>
+    class contains the method <code>mkdir()</code> and <code>mkdirs()</code>  for that purpose.
+</p>
+
+<p>
+    The <code>mkdir()</code> method creates a single directory if it does not already exist. Here is an example:
+</p>
+
+<pre class="codeBox">
+File file = new File("c:\\users\\jakobjenkov\\newdir");
+
+boolean dirCreated = file.mkdir();
+</pre>
+
+<p>
+    Provided that the directory <code>c:\users\jakobjenkov</code> already exists, the above code will create a subdirectory
+    of <code>jakobjenkov</code> named <code>newdir</code>. The <code>mkdir()</code> returns <code>true</code> if the directory was
+    created, and <code>false</code> if not.
+</p>
+
+<p>
+    The <code>mkdirs()</code> will create all directories that are missing in the path the <code>File</code> object
+    represents. Here is an example:
+</p>
+
+
+<pre class="codeBox">
+File file = new File("c:\\users\\jakobjenkov\\newdir");
+
+boolean dirCreated = file.mkdirs();
+</pre>
+
+<p>
+    Provided that the C drive exists, this example will create all the directories in the path <code>c:\users\jakobjenkov\newdir</code>.
+    The <code>mkdirs()</code> method will return <code>true</code> if all the directories were created, and <code>false</code> if not.
+</p>
+
+
+
+
+<a name="file-length"></a>
+<h2>File Length</h2>
+
+<p>
+    To read the length of a file in bytes, call the <code>length()</code> method.  Here is a simple
+    example:
+</p>
+
+<pre class="codeBox">
+File file = new File("c:\\data\\input-file.txt");
+
+long length = file.length();
+</pre>
+
+
+<a name="file-rename"></a>
+<h2>Rename or Move File</h2>
+<p>
+    To rename (or move) a file, call the method <code>renameTo()</code> on the <code>File</code> class. Here is
+    a simple example:
+</p>
+
+<pre class="codeBox">
+File file = new File("c:\\data\\input-file.txt");
+
+boolean success = file.renameTo(new File("c:\\data\\new-file.txt"));
+</pre>
+
+<p>
+    As briefly mentioned earlier, the <code>renameTo()</code> method can also be used to move a file to a different
+    directory. The new file name passed to the <code>renameTo()</code> method does not have to be in the same directory
+    as the file was already residing in.
+</p>
+
+<p>
+    The <code>renameTo()</code> method returns <code>boolean</code> (true or false), indicating whether the renaming
+    was successful. Renaming of moving a file may fail for various reasons, like the file being open, wrong file
+    permissions etc.
+</p>
+
+
+
+<a name="delete-file"></a>
+<h2>Delete File</h2>
+
+<p>
+    To delete a file call the <code>delete()</code> method. Here is a simple example:
+</p>
+
+<pre class="codeBox">
+File file = new File("c:\\data\\input-file.txt");
+
+boolean success = file.delete();
+</pre>
+
+
+
+<p>
+    The <code>delete()</code> method returns <code>boolean</code> (true or false), indicating whether the deletion
+    was successful. Deleting a file may fail for various reasons, like the file being open, wrong file
+    permissions etc.
+</p>
+
+
+<a name="isDirectory"></a>
+<h2>Check if Path is File or Directory</h2>
+
+<p>A <code>File</code> object can point to both a file or a directory.
+</p>
+
+<p>
+    You can check if a <code>File</code> object points to a file or directory, by calling its <code>isDirectory()</code>
+    method. This method returns <code>true</code> if the <code>File</code> points to a directory, and <code>false</code>
+    if the <code>File</code> points to a file. Here is a simple example:
+</p>
+
+<pre class="codeBox">
+File file = new File("c:\\data");
+
+boolean isDirectory = file.isDirectory();
+</pre>
+
+
+<a name="listDirectory"></a>
+<h2>Read List of Files in Directory</h2>
+
+<p>
+    You can obtain a list of all the files in a directory by calling either the <code>list()</code> method
+    or the <code>listFiles()</code> method. The <code>list()</code> method returns an array of String's with
+    the file and / or directory names of directory the <code>File</code> object points to. The <code>listFiles()</code>
+    returns an array of <code>File</code> objects representing the files and / or directories in the directory
+    the <code>File</code> points to.
+</p>
+
+<p>
+    Here is a simple example:
+</p>
+
+<pre class="codeBox">
+File file = new File("c:\\data");
+
+String[] fileNames = file.list();
+
+File[]   files = file.listFiles();
+</pre>
+
+</body>
